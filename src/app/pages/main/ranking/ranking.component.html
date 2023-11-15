@@ -1,0 +1,40 @@
+<div class="main">
+  <div class="container">
+    <div class="container-header">
+      <div class="header-title">
+        <span>Ranking de Contribuidores</span>
+
+        <span class="title-day">Nos últimos 90 dias</span>
+      </div>
+      <!-- <div class="header-menu">
+        <h2>Fazer o menu</h2>
+
+      </div> -->
+    </div>
+
+    <div class="container-body">
+      <table *ngFor="let ranking of rankingList">
+        <tr>
+          <!-- <a style="color: white;" routerLink="/ranking-people"> </a> -->
+          <td>
+            <div class="body-ranking">
+              <div class="ranking-number">
+                <span>{{ranking.id}}</span>
+              </div>
+
+              <img class="image-profile" [src]="'../../../../assets/no-image.svg'" alt="Foto de perfil do autor da publicação">
+              <div class="identification">
+                <span class="name">{{ranking.name}}</span>
+                <span class="nickname">{{ranking.user}}</span>
+              </div>
+
+              <div class="points">
+                <span class="span-points">{{ranking.points}}</span>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

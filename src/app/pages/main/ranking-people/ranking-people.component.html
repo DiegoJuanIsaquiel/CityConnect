@@ -1,0 +1,117 @@
+<div class="main">
+  <div class="container" *ngFor="let ranking of rankingPeopleList">
+
+    <div class="body-points">
+      <table>
+        <tr>
+          <td>
+            <div class="body-title">
+              <img [src]="'../../../../assets/no-image.svg'" alt="Foto de perfil do autor da publicação"
+              >
+              <div class="title-name">
+                <span class="name">{{ranking.name}}</span>
+                <span class="nickname">{{ranking.user}}</span>
+              </div>
+
+              <div class="trophy">
+                <ion-icon name="trophy"></ion-icon>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="line-1">
+              <ion-icon class="medal-outline" name="medal-outline"></ion-icon>
+              <div class="data">
+                <span class="points">572</span>
+                <span class="sub-title">Pontos nessa rodada</span>
+              </div>
+
+              <ion-icon class="podium-outline" name="podium-outline"></ion-icon>
+              <div class="data">
+                <span  class="points">572</span>
+                <span class="total-points">Pontos no total</span>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="line-2">
+              <ion-icon class="megaphone-outline" name="megaphone-outline"></ion-icon>
+              <div class="data" style="display: flex; flex-direction: column;">
+                <span class="points">572</span>
+                <span class="sub-title">Ocorrências registradas</span>
+              </div>
+
+              <ion-icon class="medical-outline" name="medical-outline"></ion-icon>
+              <div class="data">
+                <span class="points">572</span>
+                <span class="total-points">Pontos no total</span>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+
+    <div class="title-conquest">
+      <span>Conquistas</span>
+    </div>
+
+    <div class="body-points">
+      <table>
+        <tr>
+          <td>
+            <div class="enthusiastic">
+              <ion-icon class="library-outline" name="library-outline"></ion-icon>
+              <div class="information">
+                <span class="title">Entusiasta</span>
+                <span class="sub-title">{{ranking.name}} já registrou mais de
+                  7 ocorrências</span>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="explorer">
+              <ion-icon class="moon-outline" name="moon-outline"></ion-icon>
+              <div class="information">
+                <span class="title">Explorador</span>
+                <span class="sub-title">{{ranking.name}} já registrou mais de
+                  20 ocorrências</span>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="leader">
+              <ion-icon class="earth-outline" name="earth-outline"></ion-icon>
+              <div class="information">
+                <span class="title">Líder</span>
+                <span class="sub-title">{{ranking.name}} já registrou mais de
+                  10 ocorrências</span>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <!-- <div class="open">
+          <button>Ver mais 11 </button>
+        </div>
+
+        <div class="icon" style="display: flex; justify-content: end;">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </div> -->
+      </table>
+    </div>
+  </div>
+</div>

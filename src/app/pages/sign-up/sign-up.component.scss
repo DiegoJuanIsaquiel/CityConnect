@@ -8,70 +8,189 @@
     padding: 0 6.4vw;
 }
 
-.content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 2.4vh;
-    width: 100%;
-
-    .row{
-        width: 100%;
+.header {
+    h3, p {
+        color: var(--grey-60);
+        text-align: center;
     }
 
-    .row:not(:first-child){
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 3.2vw;
+    h3{
+        font-size: 8.1vw;
+        font-weight: 700;
     }
 
-    .input-container{
-        position: relative;
-
-
-        label{
-            position: absolute;
-            left: 4.2vw;
-            top: 30%;
-            display: flex;
-            align-items: center;
-            font-size: 4.2vw;
-            font-weight: 200;
-            color: var(--grey-70);
-        }
-
-        input{
-            background: var(--primary-color);
-            border: none;
-            border-radius: 0.8vw;
-
-            padding: 3.2vh 4.2vw;
-            font-size: 4.2vw;
-
-            width: 100%;
-            height: 4.8vh;
-
-            &:focus + label,
-            &:valid + label {
-                top: 8%;
-                font-size: 3.2vw;
-
-                transition: 0.5s;
-            }
-        }
+    p {
+        font-size: 4.4vw;
+        text-align: center;
     }
 }
 
+.content {
+
+    .stepper{
+        max-width: 1000px;
+        margin: 3.2vh 0;
+
+        .stepper-component{
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+    
+            .step{
+                &-item{
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    text-align: center;
+    
+                    &:not(:last-child):after {
+                        content: "";
+                        position: relative;
+                        top: calc(clamp(1.5rem, 5vw, 3rem) / 2);
+                        width: calc(100% - clamp(1.5rem, 5vw, 3rem) - calc(clamp(0.25rem, 2vw, 0.5rem) * 2));
+                        left: calc(50% + calc(clamp(1.5rem, 5vw, 3rem) / 2 + clamp(0.25rem, 2vw, 0.5rem)));
+                        height: 2px;
+                        background-color: var(--grey-70);
+                        order: -1;
+                    }
+    
+                    &:before{
+                        content: "";
+                        display: block;
+                        width: clamp(1.5rem, 5vw, 3rem);
+                        height: clamp(1.5rem, 5vw, 3rem);
+                        border-radius: 50%;
+                        background-color: var(--grey-60);
+                        opacity: 0.5;
+                        margin: 0 auto 1rem;
+                    }
+
+                    &.active {
+                        &:not(:last-child):after {
+                            background-color: var(--secondary-color);
+                        }
+
+                        &:before {
+                            background-color: var(--secondary-color);
+                        }
+
+                        .step-title {
+                            color: var(--secondary-color);
+                        }
+                    }
+                }
+                &-title{
+                    color: var(--grey-60);
+                    font-size: 3.2vw;
+                }
+            }
+        }
+    }
+
+    .personal-data-content,
+    .contact-content,
+    .address-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 2.4vh;
+        width: 100%;
+    
+        .row{
+            width: 85vw;
+        }
+    
+        .input-container{
+            position: relative;
+    
+    
+            label{
+                position: absolute;
+                left: 4.2vw;
+                top: 30%;
+                display: flex;
+                align-items: center;
+                font-size: 4.2vw;
+                font-weight: 200;
+                color: var(--grey-70);
+            }
+    
+            input{
+                background: var(--primary-color);
+                border: none;
+                border-radius: 1.8vw;
+    
+                padding: 3.2vh 4.2vw;
+                font-size: 4.2vw;
+    
+                width: 100%;
+                height: 4.8vh;
+    
+                &:focus + label,
+                &:valid + label {
+                    top: 8%;
+                    font-size: 3.2vw;
+    
+                    transition: 0.5s;
+                }
+            }
+        }
+    }
+    
+    .confirm-data-content {
+        width: 100%;
+    
+        .data-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8vh;
+            width: 85vw;
+    
+            .ion-item{
+              
+                display: flex;
+                flex-direction: column;
+                
+                font-size: 4.4vw;
+                font-weight: 500;
+    
+                .item-container {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+    
+                    p {
+                        margin: 0;
+                    }
+    
+                    ion-button {
+                        --ripple-color: var(--shadow-color);
+    
+                        ion-icon {
+                            color: var(--grey-60);
+                        }
+                    }
+                }
+    
+                label {
+                    color: var(--secondary-color);
+                }
+            }
+        }
+    }
+    
+
+
+}
+
 .button-container{
-    position: absolute;
-    bottom: 10.24vh;
-    width: 90%;
+    width: 85vw;
+    margin-top: 3.2vh;
 
     button{
         background: var(--secondary-color);
         border-radius: 1.8vw;
-        box-shadow: var(--box-shaddow-secondary-color);
+        box-shadow: var(--box-shadow-secondary-color);
         color: var(--background-color);
 
         font-size: 3.2vw;
@@ -81,10 +200,4 @@
         padding: 1.8vh 3.2vw;
         width: 100%;
     }
-}
-
-h3 {
-    text-align: center;
-    font-size: 8.1vw;
-    font-weight: 700;
 }

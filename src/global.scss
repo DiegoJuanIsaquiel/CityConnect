@@ -59,9 +59,15 @@ a {
     text-decoration: none;
 }
 
+.ion-page{
+    overflow-y: scroll !important;
+    overflow-x:  hidden !important;
+}
+
 :root {
     --background-color: #252930;
     --primary-color: #363945;
+    --shadow-color: #181B20;
     --secondary-color: #04FFA2;
     --text-color: #FFFFFF;
 
@@ -72,5 +78,5 @@ a {
     --grey-60: #B9BFC0;
     --grey-70: #676D6D;
 
-    --box-shaddow-secondary-color: 0 0 30px #04FFA245;
+    --box-shadow-secondary-color: 0 0 30px #04FFA245;
 }

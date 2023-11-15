@@ -1,0 +1,97 @@
+.main {
+  height: 71vh;
+  padding: 0 4.8vw;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2.4vh;
+
+  .container {
+
+    .container-header {
+      margin-bottom: 5vh;
+
+      .header-title {
+        display: flex;
+        justify-content: space-between;
+
+        span {
+          font-size: 15px;
+        }
+
+        .title-day {
+          font-size: 13px;
+          color: #748e97;
+        }
+      }
+    }
+
+    .container-body {
+      border: solid 1px #7a8087;
+      border-radius: 20px;
+
+      table {
+        width: 100%;
+
+        td {
+          height: 10vh;
+
+          border-bottom: solid 1px #7a8087;
+        }
+
+        .body-ranking {
+          display: flex;
+
+          margin-left: 1rem;
+
+          .ranking-number {
+            display: flex;
+
+            align-items: center;
+            margin-right: 1rem;
+
+            span {
+              font-size: 14px;
+            }
+          }
+
+          .image-profile {
+            width: 6rem;
+            height: 6rem;
+            margin-right: 2rem;
+
+            border-radius: 50%;
+          }
+
+          .identification {
+            width: 16rem;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+           
+            .name {
+              font-size: 16px;
+            }
+
+            .nickname {
+              font-size: 14px;
+              color: #93a0a5;
+            }
+          }
+
+          .points {
+            display: flex;
+
+            .span-points {
+              font-size: 15px;
+
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}

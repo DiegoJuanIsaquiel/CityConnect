@@ -1,0 +1,33 @@
+<div class="main">
+  <h2><span>Próximos</span> eventos:</h2>
+  <div class="hottest-events-container">
+    <div class="events-carousel">
+      <ion-card class="event-item" *ngFor="let event of upcomingEvents">
+        <img alt="Imagem do Evento" [src]="event.imageUrl || '../../../../assets/no-image.svg'" />
+        <ion-card-header>
+          <ion-card-title>{{event.title}}</ion-card-title>
+          <ion-card-subtitle>{{event.date | date}}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{event.owner}}
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  <div class="others-events-container">
+    <h3>Recomendados para você:</h3>
+    <div class="events-container">
+      <div class="event-item" *ngFor="let event of othersEvents">
+        <div class="image-container">
+          <img [src]="event.imageUrl" alt="Imagem do Evento">
+        </div>
+        <div class="content-container">
+          <span>{{event.date | date}}</span>
+          <h4>{{event.title}}</h4>
+          <p>{{event.owner}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
