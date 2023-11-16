@@ -1,0 +1,107 @@
+main{
+    height: 90vh;
+
+    .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        gap: 21vw;
+        border-bottom: 1px solid var(--primary-color);
+        width: 100vw;
+
+        h5 {
+            margin: 3.4vh 0;
+        }
+    }
+
+    .content-container {
+
+        .image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-top: 4.8vh;
+
+            img {
+                border: 2px solid var(--secondary-color);
+                border-radius: 50%;
+                width: 25vw;
+            }
+        }
+
+        .username-container {
+            margin: 2.4vh 0;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            width: 100vw;
+
+            .title {
+                font-weight: 500;
+                font-size: 5.2vw;
+            }
+
+            .sub-title {
+                color: var(--grey-70);
+                font-size: 2.8vw;
+            }
+        }
+
+
+
+
+
+
+        .informations-list {
+            display: flex;
+            flex-direction: column;
+
+            .info-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                margin: 4.8vw;
+                height: 2.4vh;
+
+                font-size: 3.2vw;
+                color: var(--grey-70);
+
+                p {
+                    color: var(--text-color);
+                    width: 50vw;
+                    border-bottom: 1px solid var(--secondary-color);
+                }
+            }
+        }
+
+        .invite-friends {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 4.4vh 0;
+
+            button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                background-color: var(--secondary-color);
+                border-radius: 1.2vw;
+                box-shadow: var(--box-shadow-secondary-color);
+
+                font-weight: 500;
+                color: var(--shadow-color);
+
+                padding: 3.2vw;
+                width: 90vw;
+            }
+        }
+    }
+}

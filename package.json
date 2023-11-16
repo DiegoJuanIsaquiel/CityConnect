@@ -33,7 +33,7 @@
     "cordova-plugin-googlemaps": "^2.7.1",
     "ionic-stepper": "^1.1.0",
     "ionicons": "^7.0.0",
-    "ngx-mask": "^13.1.4",
+    "ngx-mask": "^13.2.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

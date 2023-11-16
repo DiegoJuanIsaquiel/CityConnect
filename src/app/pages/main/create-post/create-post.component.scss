@@ -1,5 +1,5 @@
 .main {
-    height: 75vh;
+    height: 90vh;
 
     ion-header {
         ion-toolbar {
@@ -18,7 +18,7 @@
                 font-weight: 400;
 
                 margin-right: 10.8vw;
-                font-size: 5.2vw;
+                font-size: 3.8vw;
             }
 
             ion-buttons {
@@ -26,7 +26,7 @@
 
                 ion-icon {
                     color: var(--secondary-color);
-                    font-size: 10vw;
+                    font-size: 6.4vw;
                 }
             }
 
@@ -82,13 +82,81 @@
                 }
             }
 
-            .text-container p {
-                font-size: 3.8vw;
+            .text-container ion-textarea {
+                font-size: 3.2vw;
                 margin: 4.8vw 0;
             }
 
-            .image-container img {
-                border-radius: 3.2vw;
+            & > .image-container {
+                label:not(:first-of-type){
+                    margin: 0 !important;
+                  }
+
+                  .upload-label-container {
+                    width: fit-content;
+                    height: fit-content;
+                    border-radius: 1.2rem;
+
+                    background: var(--background-color);
+                    border: 1px solid var(--primary-color);
+
+                    input {
+                      margin: 0;
+                    }
+
+                    label {
+                      cursor: pointer;
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: center;
+                      align-items: center;
+
+                      padding: .2rem;
+                      margin: 0;
+
+                      height: 28vh;
+                      width: 83vw;
+
+                      border-radius: 1.2rem;
+
+                      color: var(--grey-60);
+
+                      position: relative;
+
+                      input {
+                        width: 0;
+                        height: 0;
+                        padding: 0;
+                      }
+
+                      div {
+
+                        ion-icon {
+                            background-color: var(--primary-color);
+                            border-radius: 50%;
+                            color: var(--grey-60);
+                            font-size: 6.4vw;
+                            padding: 3.4vw;
+                            margin-left: 4.4vw;
+                        }
+
+                        p {
+                          background: var(--linear-gradient);
+                          border-radius: 0.4rem;
+
+                          color: #FFFFFF;
+                          text-align: center;
+
+                          padding: .6rem .4rem;
+
+                        }
+                      }
+                    }
+                  }
+
+                  .custom-file-input::-webkit-file-upload-button {
+                    visibility: hidden;
+                  }
             }
 
             .options-container {

@@ -29,57 +29,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
 * {
-    box-sizing: border-box;
-    font-family: "Ubuntu", sans-serif;
-    scroll-behavior: smooth;
-    outline: 0;
+  box-sizing: border-box;
+  font-family: "Ubuntu", sans-serif;
+  scroll-behavior: smooth;
+  outline: 0;
 }
 
 html {
-    font-size: 10px !important;
-    font-family: "Ubuntu", sans-serif !important;
+  font-size: 10px !important;
+  font-family: "Ubuntu", sans-serif !important;
 
-    body {
-        font-family: unset;
-        font-size: unset;
-        background-color: var(--background-color);
-        color: var(--text-color);
+  body {
+    font-family: unset;
+    font-size: unset;
+    background-color: var(--background-color);
+    color: var(--text-color);
 
-        overflow: auto;
-
-        min-height: unset !important;
-        min-width: unset !important;
-    }
+    overflow: auto;
 
     min-height: unset !important;
     min-width: unset !important;
+  }
+
+  min-height: unset !important;
+  min-width: unset !important;
 }
 
 a {
-    text-decoration: none;
-    color: var(--text-color);
+  text-decoration: none;
+  color: var(--text-color);
 }
 
-.ion-page{
-    overflow-y: scroll !important;
-    overflow-x:  hidden !important;
+.ion-page {
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
 }
 
 :root {
-    --background-color: #252930;
-    --primary-color: #363945;
-    --shadow-color: #181B20;
-    --secondary-color: #04FFA2;
-    --text-color: #FFFFFF;
+  --background-color: #252930;
+  --primary-color: #363945;
+  --shadow-color: #181B20;
+  --secondary-color: #04FFA2;
+  --text-color: #FFFFFF;
 
-    --primary-blue: #2196F3;
-    --primary-red: #EE5B50;
-    --primary-orange: #FAA91C;
+  --primary-blue: #2196F3;
+  --primary-red: #EE5B50;
+  --primary-orange: #FAA91C;
 
-    --grey-60: #B9BFC0;
-    --grey-70: #676D6D;
-    --grey-80: #515351;
+  --grey-60: #B9BFC0;
+  --grey-70: #676D6D;
+  --grey-80: #515351;
 
-    --box-shadow-secondary-color: 0 0 30px #04FFA245;
-    --box-shadow-button-disabled: 0 0 30px #B9BFC045;
+  --box-shadow-secondary-color: 0 0 30px #04FFA245;
+  --box-shadow-button-disabled: 0 0 30px #B9BFC045;
+}
+
+.btn-report-modal-container {
+  --border-radius: 0.6rem;
+
+  // background-color: #04FFA2;
+  --height: 15vh;
+  --width: 40vw;
+
+  @media screen and (max-width: 796px) {
+    --width: 50vw;
+  }
+
+  &::part(content) {
+    margin: 64vh 0 0 0;
+    border-radius: 17px;
+  }
+}
+
+ion-modal>.ion-page {
+  background: var(--shadow-color);
+  border: 1px solid var(--grey-70);
+  border-radius: 1.8vh;
+  justify-content: center;
 }

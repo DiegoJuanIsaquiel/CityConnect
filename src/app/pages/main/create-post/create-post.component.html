@@ -1,7 +1,7 @@
 <div class="main">
   <ion-header>
     <ion-toolbar>
-      <ion-buttons slot="start">
+      <ion-buttons slot="start" (click)="navigateTo('home')">
         <ion-icon name="arrow-back"></ion-icon>
       </ion-buttons>
       <ion-title>Criar Publicação</ion-title>
@@ -21,10 +21,23 @@
         </div>
       </div>
       <div class="text-container">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta pariatur esse exercitationem aliquid, fugiat officia totam incidunt eligendi repellendus perferendis est provident autem illum neque quas doloremque repudiandae, cum delectus?</p>
+        <ion-textarea
+          placeholder="O que você está pensando?"
+          [autoGrow]="true"
+        ></ion-textarea>
       </div>
       <div class="image-container">
-        <img [src]="'../../../../assets/no-image.svg'">
+        <section class="upload-label-container">
+          <label for="imageUrl">
+            <div>
+              <ion-icon name="images"></ion-icon>
+              <br>
+              <p>Adicionar Imagem</p>
+            </div>
+            <input type="file" id="imageUrl" nbInput accept="image/png, image/jpeg"
+              class="custom-file-input">
+          </label>
+        </section>
       </div>
       <div class="options-container">
         <span>Adicionar a publicação</span>

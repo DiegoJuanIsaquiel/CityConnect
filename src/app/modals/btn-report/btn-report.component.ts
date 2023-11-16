@@ -1,25 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { BtnReportComponent } from 'src/app/modals/btn-report/btn-report.component';
 import { PageEnum } from 'src/app/models/enums/pages.enum';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
+  selector: 'app-btn-report',
+  templateUrl: './btn-report.component.html',
+  styleUrls: ['./btn-report.component.scss'],
 })
-export class FooterComponent {
+export class BtnReportComponent implements OnInit {
 
-  //#region Constructor Region
+  //#region Constructor
+
   constructor(
     private router: Router,
-    private modalController: ModalController ,
+    private modalController: ModalController,
   ) {
     this.setCurrentPage(this.router.url.split('/')[2]);
   }
 
   //#endregion
+
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
   //#region Public Properties
 
@@ -38,35 +42,25 @@ export class FooterComponent {
 
   public setCurrentPage(url: string): void {
     switch (url) {
-      case 'home':
-        this.currentPage = this.pageEnum.HOME;
-        break;
-      case 'events':
-        this.currentPage = this.pageEnum.EVENTS;
-        break;
       case 'add-report':
         this.currentPage = this.pageEnum.ADD_REPORT;
         break;
       case 'create-post':
         this.currentPage = this.pageEnum.ADD_POST;
         break;
-      case 'ranking':
-        this.currentPage = this.pageEnum.RANKING;
-        break;
-      case 'profile':
-        this.currentPage = this.pageEnum.PROFILE;
-        break;
     }
   }
 
-  //#endregion
+  public addReport(): void {
+    this.navigateTo('add-report');
+    this.modalController.dismiss();
+  }
 
-public async showModal(): Promise<void> {
-  const btnReportModal = await this.modalController.create({
-    component: BtnReportComponent,
-    cssClass: 'btn-report-modal-container'
-  });
-  return await btnReportModal.present();
-}
+  public createPost(): void {
+    this.navigateTo('create-post');
+    this.modalController.dismiss();
+  }
+
+  //#endregion
 
 }
