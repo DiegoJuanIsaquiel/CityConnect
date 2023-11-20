@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GoogleMap, Marker } from '@capacitor/google-maps';
+import { Observable, Subscriber } from 'rxjs';
 import { GeocodingService } from 'src/app/services/geocoding/geocoding.service';
+import { convertToBase64 } from 'src/app/utils/functions';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -56,6 +58,8 @@ export class AddReportComponent implements OnInit {
   public isModalOpen: boolean = true;
 
   public formGroup!: FormGroup;
+
+  public base64ImageUrl: string = '';
 
   public styles: any = [
     {
@@ -283,6 +287,42 @@ export class AddReportComponent implements OnInit {
       return
 
     this.formGroup.controls['location'].setValue('Região próxima a: ' + success.results[0].formatted_address);
+  }
+
+  public async uploadImage(event: Event): Promise<void> {
+    const target = event.target as HTMLInputElement;
+
+    const file: File = (target.files as FileList)[0];
+
+    this.convertToBase64(file);
+
+    console.log(this.base64ImageUrl);
+  }
+
+  public convertToBase64(file: File): void {
+    const observable = new Observable((subscriber: Subscriber<any>) => {
+      this.readFile(file, subscriber);
+    });
+    
+    observable.subscribe((d: string) => {
+      this.base64ImageUrl = d;
+    })  
+  }
+  
+  public readFile(file: File, subscriber: Subscriber<any>){
+    const fileReader = new FileReader();
+  
+    fileReader.readAsDataURL(file);
+  
+    fileReader.onload = () => {
+      subscriber.next(fileReader.result);
+      subscriber.complete();
+    }
+  
+    fileReader.onerror = () => {
+      subscriber.error();
+      subscriber.complete();
+    }
   }
 
   public async onSubmit(): Promise<void> {

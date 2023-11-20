@@ -38,6 +38,11 @@ ion-modal ion-content{
             padding: 0.6vh 2.4vw !important;
             border-radius: 1.8vw;
         }
+
+        &.withImage {
+            border: 1px solid var(--grey-70);
+            border-radius: 3.2vw;
+        }
     }
 
     button {

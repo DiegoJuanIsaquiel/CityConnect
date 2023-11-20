@@ -42,9 +42,10 @@
               </ion-select>
             </ion-item>
             <label for="image">Inserir Imagem<span>*</span></label>
-            <ion-item lines="none">
-              <ion-input type="file" accept="image/*" id="image" formControlName="imageUrl" placeholder="Insira uma imagem desta ocorrência">
+            <ion-item lines="none" style="margin: 1.8vh 3.4vw;" [class.withImage]="base64ImageUrl !== ''">
+              <ion-input type="file" accept="image/*" id="image" formControlName="imageUrl" placeholder="Insira uma imagem desta ocorrência" (change)="uploadImage($event)">
               </ion-input>
+              <img [src]="base64ImageUrl" *ngIf="base64ImageUrl !== ''" >
             </ion-item>
             <button (click)="onSubmit()">Enviar Ocorrência</button>
           </form>
