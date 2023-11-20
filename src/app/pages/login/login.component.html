@@ -4,21 +4,23 @@
     <h1>CityConnect</h1>
     <p>Sua Cidade, Sua Voz!</p>
   </div>
-  <div class="input-container">
-    <ion-item fill="solid">
-      <ion-icon name="mail-open" slot="start"></ion-icon>
-      <ion-label position="floating">E-mail</ion-label>
-      <ion-input type="email" placeholder="Insira seu endereço de e-mail" ></ion-input>
-    </ion-item>
-    <ion-item fill="solid">
-      <ion-icon name="lock-closed" slot="start"></ion-icon>
-      <ion-label position="floating">Senha</ion-label>
-      <ion-input type="password" placeholder="Insira sua senha" ></ion-input>
-    </ion-item>
-    <p>Esqueci minha senha.</p>
-  </div>
-  <div class="button-container">
-    <button routerLink="/main/home">Entrar</button>
-    <p>Ainda não possui cadastro? <span routerLink="/sign-up">Clique aqui.</span></p>
-  </div>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="input-container">
+      <ion-item fill="solid">
+        <ion-icon name="mail-open" slot="start"></ion-icon>
+        <ion-label position="floating">E-mail</ion-label>
+        <ion-input type="email" placeholder="Insira seu endereço de e-mail" formControlName="username"></ion-input>
+      </ion-item>
+      <ion-item fill="solid">
+        <ion-icon name="lock-closed" slot="start"></ion-icon>
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input type="password" placeholder="Insira sua senha" formControlName="password"></ion-input>
+      </ion-item>
+      <p>Esqueci minha senha.</p>
+    </div>
+    <div class="button-container">
+      <button (click)="onSubmit()" [disabled]="!formGroup.valid">Entrar</button>
+      <p>Ainda não possui cadastro? <span routerLink="/sign-up">Clique aqui.</span></p>
+    </div>
+  </form>
 </div>
