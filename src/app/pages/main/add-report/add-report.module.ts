@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddReportComponent } from './add-report.component';
 import { IonicModule } from '@ionic/angular';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [{ path: '', component: AddReportComponent }];
 
@@ -11,6 +12,7 @@ const routes: Routes = [{ path: '', component: AddReportComponent }];
   imports: [
     CommonModule,
     IonicModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
   exports: [
