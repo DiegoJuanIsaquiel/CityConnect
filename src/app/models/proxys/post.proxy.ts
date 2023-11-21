@@ -1,6 +1,9 @@
 export interface PostProxy {
-    id: number;
-    owner: string;
-    imageUrl: string;
-    description: string;
+    usuarioName: string,
+    usuarioId: string,
+    usuarioImagem: string,
+    usuario: string,
+    imagem: string,
+    Descricao: string,
+    dataHoraPostagem: Date
 }

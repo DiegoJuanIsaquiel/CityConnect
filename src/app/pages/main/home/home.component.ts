@@ -1,32 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { PostProxy } from 'src/app/models/proxys/post.proxy';
+import { HttpAsyncService } from 'src/app/modules/http-async/services/http-async.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent  implements OnInit {
+export class HomeComponent implements OnInit {
+
+  //#region Constructor
+
+  constructor(
+    private readonly http: HttpAsyncService
+  ) {}
+
+  //#endregion
 
   //#region Public Properties
 
   public postList: PostProxy[] = [
     {
-      id: 1,
-      owner: 'Mateus Dias',
-      imageUrl: 'https://img.olhardigital.com.br/wp-content/uploads/2020/02/20200226021016.jpg',
-      description: 'Um descaso imenso com o cidadão sorocabano. Estava caminhando próximo a Praça do Canhão, quando me deparei com essa cena assustadora. Precisamos arrumar isso @Prefeitura, cuidar das nossas maritacas que pousam nesses fios. #SOSMaritacas #BrasilVerde&Amarelo',
-    },
-    {
-      id: 2,
-      owner: 'Diego Juan Isaquiel',
-      imageUrl: 'https://img.nsctotal.com.br/wp-content/uploads/2022/10/foto-onibus-lotado-blumenau-guilherme-de-morais_1-1.jpg',
-      description: '6h34 da manhã. Busão lotado e o prefeito tá onde? Gravando vídeo pra instagram. Até quando isso @RodrigoManga? Já está na hora de pensar em medidas pra resolver o problema da lotação dos onibus na cidade,',
+      usuarioName: 'Bruna Andressa Bragatti Antunes',
+      usuarioId: 'a00Hu0000149jEEIAY',
+      usuarioImagem: '',
+      usuario: '@brunaantunes',
+      imagem: '',
+      Descricao: 'Teste Postagem',
+      dataHoraPostagem: new Date(2023, 11, 8)
     }
   ];
 
   //#endregion
 
-  ngOnInit() {}
+  public async ngOnInit(): Promise<void> {
+    const { error, success } = await this.http.get<any>(`${environment.api.baseUrl}${environment.api.postagem.get}`);
+
+    if (error || !success)
+      return
+
+    this.postList = success.dadosPostagens;
+  }
 
 }
