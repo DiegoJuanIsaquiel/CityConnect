@@ -4,30 +4,30 @@
     </div>
     <div class="content-container">
         <div class="image-container">
-            <img src="../../../assets/no-image.svg" alt="Imagem de perfil do usuário">
+            <img [src]="currentUser.fotoPerfil || '../../../assets/no-image.svg'" alt="Imagem de perfil do usuário">
         </div>
         <div class="username-container">
-            <div class="title">Bruna Antunes</div>
+            <div class="title">{{currentUser.Nome}}</div>
             <div class="sub-title">
-                <p>@brunaantunes</p>
+                <p>{{currentUser.Usuario}}</p>
             </div>
         </div>
         <div class="informations-list">
             <div class="info-item">
                 <label>Data de Nascimento</label>
-                <p>23/07/1960</p>
+                <p>{{currentUser.dataNascimento | date:'dd/MM/YYYY'}}</p>
             </div>
             <div class="info-item">
                 <label>CPF</label>
-                <p>471.863.918-26</p>
+                <p >{{currentUser.CPF | cpf}}</p>
             </div>
             <div class="info-item">
                 <label>Celular</label>
-                <p>11 99399-4504</p>
+                <p>{{currentUser.telefone | phone}}</p>
             </div>
             <div class="info-item">
                 <label>Cidade</label>
-                <p>Sorocaba (SP)</p>
+                <p>{{userCity}}</p>
             </div>
         </div>
         <div class="invite-friends">

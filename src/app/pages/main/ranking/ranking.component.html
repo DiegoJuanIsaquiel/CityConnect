@@ -9,7 +9,7 @@
 
     <div class="container-body">
       <div class="body-ranking" *ngFor="let ranking of rankingList; let i = index" [attr.data-index]="i">
-        <a (click)="viewProfile(ranking.id)" class="body-item">
+        <a class="body-item">
           <div class="body-image">
             <div class="body-index">
               <span >{{i + 1}}</span>
