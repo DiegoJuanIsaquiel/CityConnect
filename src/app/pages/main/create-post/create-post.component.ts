@@ -54,14 +54,14 @@ export class CreatePostComponent implements OnInit {
   //#region Public Methods
 
   public async getUser(): Promise<void> {
-    const { error, success } = await this.http.get<UserProxy>(`${environment.api.baseUrl}${environment.api.usuario.get}`);
+    const { error, success } = await this.http.get<any>(`${environment.api.baseUrl}${environment.api.usuario.get}`);
 
     if(error || !success)
       return
 
-    this.currentUser = success.Nome;
-    this.currentUserUsername = success.Usuario;
-    this.currentUserImage = success.fotoPerfil;
+    this.currentUser = success.dadosUsuario.Nome;
+    this.currentUserUsername = success.dadosUsuario.Usuario;
+    this.currentUserImage = success.dadosUsuario.fotoPerfil;
   }
 
   public async navigateTo(url: string): Promise<void> {
