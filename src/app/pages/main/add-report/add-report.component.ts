@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GoogleMap, Marker } from '@capacitor/google-maps';
 import { Observable, Subscriber } from 'rxjs';
 import { GeocodingService } from 'src/app/services/geocoding/geocoding.service';
-import { convertToBase64 } from 'src/app/utils/functions';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -270,9 +269,9 @@ export class AddReportComponent implements OnInit {
       }
 
       this.map.addMarker(marker);
-      
+
       this.openModal(true);
-      
+
       this.reportCoordinates = marker.coordinate;
 
       this.setMarkerLocation(event.latitude, event.longitude);
@@ -303,22 +302,22 @@ export class AddReportComponent implements OnInit {
     const observable = new Observable((subscriber: Subscriber<any>) => {
       this.readFile(file, subscriber);
     });
-    
+
     observable.subscribe((d: string) => {
       this.base64ImageUrl = d;
-    })  
+    })
   }
-  
+
   public readFile(file: File, subscriber: Subscriber<any>){
     const fileReader = new FileReader();
-  
+
     fileReader.readAsDataURL(file);
-  
+
     fileReader.onload = () => {
       subscriber.next(fileReader.result);
       subscriber.complete();
     }
-  
+
     fileReader.onerror = () => {
       subscriber.error();
       subscriber.complete();

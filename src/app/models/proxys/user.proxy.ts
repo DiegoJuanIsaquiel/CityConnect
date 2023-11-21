@@ -1,17 +1,13 @@
-import { BaseCrudProxy } from "./base-crud.proxy";
-
-export interface UserProxy extends BaseCrudProxy {
-    name: string;
-    username: string;
-    email: string;
-    imageUrl: string;
-    birthday: Date;
-    phone: string;
-    cpf: string;
-    city: string;
-    state: string;
-    location: {
-        longitude: string,
-        latitude: string
-    };
+export interface UserProxy {
+    Usuario: string,
+    telefone: string,
+    pontuacao: string,
+    Nome: string,
+    longitude: number,
+    latitude: number,
+    fotoPerfil: string,
+    Email: string,
+    dataNascimento: Date,
+    dadosConquista: { Nome: string, Descricao: string}[],
+    CPF: string
 }

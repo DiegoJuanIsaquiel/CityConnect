@@ -11,12 +11,12 @@
     <div class="post-container">
       <div class="user-container">
         <div class="image-container">
-          <img [src]="'../../../../assets/no-image.svg'" alt="Foto de perfil do autor da publicação">
+          <img [src]="currentUserImage" alt="Foto de perfil do autor da publicação">
         </div>
         <div class="username-container">
           <div class="username">
-            <h3>Mateus Dias</h3>
-            <p>@ma_teuz03</p>
+            <h3>{{currentUser}}</h3>
+            <p>{{currentUserUsername}}</p>
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@
         ></ion-textarea>
       </div>
       <div class="image-container">
-        <section class="upload-label-container">
+        <section class="upload-label-container"*ngIf="!formGroup.controls['imagemBase64__c'].value">
           <label for="imageUrl">
             <div>
               <ion-icon name="images"></ion-icon>
@@ -35,9 +35,19 @@
               <p>Adicionar Imagem</p>
             </div>
             <input type="file" id="imageUrl" nbInput accept="image/png, image/jpeg"
-              class="custom-file-input">
+              class="custom-file-input" (change)="uploadImage($event)">
           </label>
         </section>
+        <div>
+          <section *ngIf="formGroup.controls['imagemBase64__c'].value">
+            <div class="remove-image-container" (click)="removeImage()">
+              <ion-icon name="close"></ion-icon>
+            </div>
+            <div class="image-container">
+              <img class="image" [src]="formGroup.controls['imagemBase64__c'].value" alt="imagem do produto/serviço">
+            </div>
+          </section>
+        </div>
       </div>
       <div class="options-container">
         <span>Adicionar a publicação</span>
