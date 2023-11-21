@@ -1,7 +1,6 @@
 export interface RankingProxy {
-    id: number;
-    name: string;
-    user: string;
-    image: string;
-    points: number;
+    Usuario: string
+    Pontuacao: number
+    Nome: string
+    fotoPerfil: string
 }

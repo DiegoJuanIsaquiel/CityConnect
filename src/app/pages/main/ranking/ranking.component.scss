@@ -43,7 +43,7 @@
       padding: 3.2vh 0px;
       border: 1px solid var(--grey-70);
 
-      &:first-child{
+      &:first-child {
         border-radius: 2.8vw 2.8vw 0 0;
       }
 
@@ -64,7 +64,9 @@
 
           img {
             width: 14.4vw;
+            height: 14.4vw;
             border-radius: 50%;
+            object-fit: cover;
           }
         }
 

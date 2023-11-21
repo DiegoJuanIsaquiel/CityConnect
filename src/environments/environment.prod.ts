@@ -21,7 +21,7 @@ export const environment = {
       create: "/usuario/",
     },
     ranking: {
-      get: "/usuario/",
+      get: "/ranking/",
     },
   }
 };

@@ -9,19 +9,19 @@
 
     <div class="container-body">
       <div class="body-ranking" *ngFor="let ranking of rankingList; let i = index" [attr.data-index]="i">
-        <a routerLink="/ranking-people" class="body-item">
+        <a (click)="viewProfile(ranking.id)" class="body-item">
           <div class="body-image">
             <div class="body-index">
               <span >{{i + 1}}</span>
             </div>
-            <img [src]="'../../../../assets/no-image.svg'" alt="Foto de perfil do usuário">
+            <img [src]="ranking.fotoPerfil || '../../../../assets/no-image.svg'" alt="Foto de perfil do usuário">
             <div class="body-username">
-              <h4>{{ranking.name}}</h4>
-              <p>{{ranking.user}}</p>
+              <h4>{{ranking.Nome}}</h4>
+              <p>{{ranking.Usuario}}</p>
             </div>
           </div>
           <div class="points">
-            <p>{{ranking.points > 999 ? '+999' : ranking.points}} Pontos</p>
+            <p>{{ranking.Pontuacao > 999 ? '+999' : ranking.Pontuacao}} Pontos</p>
           </div>
         </a>
       </div>
