@@ -1,0 +1,24 @@
+<div class="main">
+  <div class="post-container" *ngFor="let post of postList">
+    <div class="user-container">
+      <div class="image-container">
+        <img [src]="post.usuarioImagem ||  '../../../../assets/no-image.svg'" alt="Foto de perfil do autor da publicação">
+      </div>
+      <div class="username-container">
+        <div class="username">
+          <h3>{{post.usuarioName}}</h3>
+          <p>{{post.usuario}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-container">
+      <p>{{post.Descricao}}</p>
+    </div>
+    <div class="image-container" *ngIf="post.imagem !== ''">
+      <img [src]="post.imagem">
+    </div>
+    <div class="options-container">
+
+    </div>
+  </div>
+</div>

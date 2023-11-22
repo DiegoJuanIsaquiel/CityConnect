@@ -1,0 +1,34 @@
+.main {
+    background-color: var(--shadow-color);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 2.4vh 5.8vw;
+
+    z-index: 10;
+
+    .active ion-icon {
+        color: var(--secondary-color);
+        -webkit-filter: drop-shadow(var(--box-shadow-secondary-color));
+        filter: drop-shadow(var(--box-shadow-secondary-color));
+    }
+
+    .add-report-container {
+        background-color: var(--secondary-color);
+        border-radius: 50%;
+        padding: 2.4vw;
+
+        ion-icon {
+            font-size: 7.2vw;
+            color: var(--text-color);
+        }
+    }
+
+    ion-icon {
+        font-size: 6.4vw;
+        color: var(--primary-color);
+    }
+
+}

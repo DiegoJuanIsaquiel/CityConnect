@@ -1,0 +1,28 @@
+.main {
+    background-color: var(--shadow-color);
+    box-shadow: 0 3px 0 var(--primary-color);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 2.4vh 5.8vw;
+
+    z-index: 10;
+
+    .image-container img {
+        border: 2px solid var(--secondary-color);
+        border-radius: 50%;
+
+        width: 11vw;
+    }
+
+    .logo-container img {
+        width: 10vw;
+    }
+
+    .filter-container ion-icon {
+        font-size: 6vw;
+        color: var(--grey-70);
+    }
+}

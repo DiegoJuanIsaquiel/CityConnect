@@ -1,0 +1,207 @@
+.main {
+  height: 75vh;
+  padding: 0 4.8vw;
+
+
+  .body-status {
+    background: var(--shadow-color);
+    border: 1px solid var(--grey-70);
+    border-radius: 4.4vw;
+
+    padding: 3.2vw;
+
+    .body-title {
+      display: flex;
+      gap: 4.2vw;
+
+      img {
+        width: 10.8vw;
+        border-radius: 50%;
+      }
+
+      .title-name {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        h4 {
+          color: var(--grey-60);
+          font-size: 4.4vw;
+          font-weight: 400;
+          margin: 0;
+
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 55vw;
+          white-space: nowrap;
+        }
+
+        p {
+          font-size: 2.8vw;
+          color: var(--grey-70);
+
+          margin: 0;
+        }
+      }
+    }
+
+    .line-1,
+    .line-2 {
+      display: flex;
+      justify-content: space-between;
+
+      margin-top: 2.4vh;
+
+      .data {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        margin-left: 1.8vw;
+      }
+    }
+
+    .round {
+      display: flex;
+      margin-left: 2.8vw;
+      margin-top: 2.8vw;
+
+      ion-icon {
+        font-size: 8.1vw;
+        color: var(--primary-orange);
+      }
+    }
+
+    .total-points {
+      display: flex;
+      margin-left: 2.8vw;
+      margin-top: 2.8vw;
+
+
+      ion-icon {
+        font-size: 8.1vw;
+        color: var(--secondary-color);
+      }
+    }
+
+    .occurrences {
+      display: flex;
+      margin-left: 2.8vw;
+      margin-top: 2.8vw;
+
+      ion-icon {
+        font-size: 8.1vw;
+        color: var(--primary-blue);
+      }
+    }
+
+    .teste {
+      display: flex;
+      margin-left: 2.8vw;
+      margin-top: 2.8vw;
+
+      ion-icon {
+        font-size: 8.1vw;
+        color: var(--primary-red);
+      }
+    }
+  }
+
+  .title-conquest {
+    margin-top: 3.2vh;
+
+    span {
+      font-size: 5.4vw;
+    }
+  }
+
+  .body-conquest {
+    background: var(--shadow-color);
+    border: 1px solid var(--grey-70);
+    margin-top: 1.8vh;
+
+    border-radius: 4.4vw;
+
+    padding: 4.8vw;
+
+    .conquests {
+      display: flex;
+      flex-direction: column;
+      gap: 2.4vh;
+
+      .information {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 3.2vw;
+
+        .title {
+          font-size: 3.8vw;
+          font-weight: 600;
+        }
+
+        .sub-title {
+          font-size: 3.2vw;
+          color: var(--grey-70);
+          width: 60vw;
+        }
+      }
+
+      .enthusiastic {
+        display: flex;
+
+        ion-icon {
+          font-size: 8.4vw;
+          color: var(--primary-blue);
+        }
+      }
+
+      .explorer {
+        display: flex;
+
+        ion-icon {
+          font-size: 8.4vw;
+          color: var(--primary-orange);
+        }
+      }
+
+      .leader {
+        display: flex;
+
+        ion-icon {
+          font-size: 8.4vw;
+          color: var(--secondary-color);
+        }
+      }
+
+      .open {
+        border-top: 1px solid var(--grey-70);
+        display: flex;
+        justify-content: space-between;
+
+        button {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          background-color: transparent;
+          color: white;
+
+          margin-top: 2.4vh;
+
+          width: 100%;
+        }
+      }
+
+      .icon {
+        display: flex;
+        justify-content: end;
+
+        ion-icon {
+          font-size: 4.4vw;
+          color: var(--secondary-color);
+        }
+      }
+    }
+  }
+}

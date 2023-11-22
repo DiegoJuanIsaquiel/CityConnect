@@ -1,0 +1,137 @@
+.main {
+  height: 75vh;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2.4vh;
+
+  padding: 0 4.8vw;
+  margin: 5vh 0 50vh 0;
+
+  .container {
+
+    &-header {
+
+      .header-title {
+        display: flex;
+        justify-content: space-between;
+
+        span {
+          font-size: 4.4vw;
+          font-weight: 500;
+        }
+
+        .title-day {
+          font-size: 3.2vw;
+          color: var(--grey-80);
+        }
+
+      }
+
+    }
+
+    &-body {
+      background: var(--shadow-color);
+
+      border: 1px solid var(--grey-70);
+      border-radius: 1.8vh;
+
+      margin-top: 4.4vh;
+    }
+
+    .body-ranking {
+      padding: 3.2vh 0px;
+      border: 1px solid var(--grey-70);
+
+      &:first-child {
+        border-radius: 2.8vw 2.8vw 0 0;
+      }
+
+      &:last-child {
+        border-radius: 0 0 2.8vw 2.8vw;
+      }
+
+      .body-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 0 3.2vw;
+
+        .body-image {
+          display: flex;
+          gap: 2.4vw;
+
+          img {
+            width: 14.4vw;
+            height: 14.4vw;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+
+        .body-index {
+          display: flex;
+          align-items: center;
+
+          color: var(--grey-80);
+
+          margin-right: 3.2vw;
+          font-size: 4.2vw;
+        }
+
+        .body-username {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          margin-left: 1.4vw;
+
+          h4 {
+            font-size: 4.4vw;
+            font-weight: 500;
+            color: var(--grey-60);
+            margin: 0;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            width: 30vw;
+            white-space: nowrap;
+
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+          }
+
+          p {
+            color: var(--grey-70);
+            margin: 0.8vh 0;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            width: 25vw;
+            white-space: nowrap;
+
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+          }
+        }
+      }
+
+      .points p {
+        font-size: 4.4vw;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        width: 25vw;
+        white-space: nowrap;
+
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+      }
+
+    }
+  }
+}
