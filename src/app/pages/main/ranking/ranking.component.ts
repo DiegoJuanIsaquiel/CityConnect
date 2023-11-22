@@ -60,14 +60,14 @@ export class RankingComponent {
   ];
 
   //#endregion
-  
+
   //#region Lifecycle Methods
 
   public async ngOnInit(): Promise<void> {
     const { error, success } = await this.http.get<any>(`${environment.api.baseUrl}${environment.api.ranking.get}`);
 
     if (error || !success)
-      return
+    return
 
     this.rankingList = success.dadosRanking;
   }

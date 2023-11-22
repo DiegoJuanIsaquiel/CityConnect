@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
     const { error, success } = await this.http.get<any>(`${environment.api.baseUrl}${environment.api.postagem.get}`);
 
     if (error || !success)
-      return
+    return
 
     this.postList = success.dadosPostagens;
   }
