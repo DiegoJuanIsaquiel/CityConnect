@@ -107,3 +107,14 @@ ion-modal>.ion-page {
   border-radius: 1.8vh;
   justify-content: center;
 }
+
+.spinner{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  ion-spinner {
+      --color: var(--secondary-color)
+  }
+}

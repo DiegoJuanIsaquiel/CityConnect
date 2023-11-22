@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { EventProxy } from 'src/app/models/proxys/event.proxy';
 import { HttpAsyncService } from 'src/app/modules/http-async/services/http-async.service';
 import { environment } from 'src/environments/environment';
@@ -13,34 +14,21 @@ export class EventsComponent implements OnInit {
   //#region Constructor
 
   constructor(
-    private readonly http: HttpAsyncService
+    private readonly http: HttpAsyncService,
+    private readonly toast: ToastController,
   ) {}
 
   //#endregion
 
   //#region Public Properties
 
-  public eventsList: EventProxy[] = [
-    {
-      Organizador: 'Teste',
-      Nome: 'Teste',
-      Local: 'Praça Prefeitura',
-      Imagem: '',
-      DataEvento: new Date(2024, 11, 21)
-    },
-    {
-      Organizador: 'Teste 2',
-      Nome: 'Teste 2',
-      Local: 'Pracinha',
-      Imagem: '',
-      DataEvento: new Date(2023, 11, 7)
-    }
-  ];
+  public eventsList: EventProxy[] = [];
 
   public upcomingEvents: EventProxy[] = []
 
   public othersEvents: EventProxy[] = []
 
+  public isLoading: boolean = false;
 
   //#endregion
 
@@ -48,12 +36,26 @@ export class EventsComponent implements OnInit {
 
   public async ngOnInit(): Promise<void> {
 
-    // const { error, success } = await this.http.get<any>(`${environment.api.baseUrl}${environment.api.eventos.get}`);
+    this.isLoading = true;
 
-    // if (error || !success)
-    //   return
+    const { error, success } = await this.http.get<any>(`${environment.api.baseUrl}${environment.api.eventos.get}`);
 
-    // this.eventsList = success.dadosEventos;
+    this.isLoading = false;
+
+    if (error || !success){
+      if (error || !success) {
+        const toast = this.toast.create({
+          message: 'Ocorreu um erro ao tentar obter os eventos da cidade. Por favor, tente novamente mais tarde',
+          position: 'top',
+          duration: 5000,
+        });
+  
+        return (await toast).present();
+      }
+  
+    }
+
+    this.eventsList = success.dadosEventos;
 
     this.eventsList.forEach((item) => {
       let maxDate = new Date();
