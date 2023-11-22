@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({ name: 'cpf' })
 export class CpfPipe implements PipeTransform {
@@ -17,3 +17,12 @@ export class CpfPipe implements PipeTransform {
         return valorFormatado;
     }
 }
+@NgModule({
+    declarations: [
+        CpfPipe
+    ],
+    exports: [
+        CpfPipe
+    ]
+})
+export class CPFPipeModule { }

@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile.component';
 import { RouterModule, Routes } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { CpfPipe } from 'src/app/pipes/cpf.pipe';
-import { PhonePipe } from 'src/app/pipes/phone.pipe';
+import { CPFPipeModule, CpfPipe } from 'src/app/pipes/cpf.pipe';
+import { PhonePipe, PhonePipeModule } from 'src/app/pipes/phone.pipe';
 
 const routes: Routes = [{ path: '', component: ProfileComponent }];
 
@@ -12,6 +12,8 @@ const routes: Routes = [{ path: '', component: ProfileComponent }];
   imports: [
     IonicModule,
     CommonModule,
+    PhonePipeModule,
+    CPFPipeModule,
     RouterModule.forChild(routes),
   ],
   
@@ -20,8 +22,6 @@ const routes: Routes = [{ path: '', component: ProfileComponent }];
   ],
   declarations: [
     ProfileComponent,
-    CpfPipe,
-    PhonePipe
   ]
 })
 export class ProfileModule { }

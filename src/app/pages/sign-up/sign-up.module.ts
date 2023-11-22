@@ -5,8 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
-import { CpfPipe } from 'src/app/pipes/cpf.pipe';
-import { PhonePipe } from 'src/app/pipes/phone.pipe';
+import { CPFPipeModule, CpfPipe } from 'src/app/pipes/cpf.pipe';
+import { PhonePipe, PhonePipeModule } from 'src/app/pipes/phone.pipe';
 import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
@@ -23,6 +23,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     IonicModule,
     HttpClientModule,
+    PhonePipeModule,
+    CPFPipeModule,
     NgxMaskModule.forChild(),
     RouterModule.forChild(routes)
   ],
@@ -31,8 +33,6 @@ const routes: Routes = [
   ],
   declarations: [
     SignUpComponent,
-    CpfPipe,
-    PhonePipe
   ],
 })
 export class SignUpModule { }
