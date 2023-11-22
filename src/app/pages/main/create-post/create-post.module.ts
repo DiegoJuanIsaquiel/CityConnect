@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CreatePostComponent } from './create-post.component';
 import { IonicModule } from '@ionic/angular';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [{ path: '', component: CreatePostComponent }];
 
@@ -10,6 +11,7 @@ const routes: Routes = [{ path: '', component: CreatePostComponent }];
   imports: [
     CommonModule,
     IonicModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
   exports: [
