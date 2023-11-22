@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private readonly http: HttpAsyncService,
     private readonly toast: ToastController
-  ) {}
+  ) { }
 
   //#endregion
 
@@ -31,23 +31,21 @@ export class HomeComponent implements OnInit {
   public async ngOnInit(): Promise<void> {
 
     this.isLoading = true;
-    
+
     const { error, success } = await this.http.get<any>(`${environment.api.baseUrl}${environment.api.postagem.get}`);
-    
+
     this.isLoading = false;
 
-    if (error || !success){
-      if (error || !success) {
-        const toast = this.toast.create({
-          message: 'Ocorreu um erro ao tentar obter as publicações. Por favor, tente novamente mais tarde',
-          position: 'top',
-          duration: 5000,
-        });
-  
-        return (await toast).present();
-      }
-  
+    if (error || !success) {
+      const toast = this.toast.create({
+        message: 'Ocorreu um erro ao tentar obter as publicações. Por favor, tente novamente mais tarde',
+        position: 'top',
+        duration: 5000,
+      });
+
+      return (await toast).present();
     }
+
 
     this.postList = success.dadosPostagens;
   }

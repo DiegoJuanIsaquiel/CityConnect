@@ -16,7 +16,7 @@ export class EventsComponent implements OnInit {
   constructor(
     private readonly http: HttpAsyncService,
     private readonly toast: ToastController,
-  ) {}
+  ) { }
 
   //#endregion
 
@@ -42,18 +42,17 @@ export class EventsComponent implements OnInit {
 
     this.isLoading = false;
 
-    if (error || !success){
-      if (error || !success) {
-        const toast = this.toast.create({
-          message: 'Ocorreu um erro ao tentar obter os eventos da cidade. Por favor, tente novamente mais tarde',
-          position: 'top',
-          duration: 5000,
-        });
-  
-        return (await toast).present();
-      }
-  
+    if (error || !success) {
+      const toast = this.toast.create({
+        message: 'Ocorreu um erro ao tentar obter os eventos da cidade. Por favor, tente novamente mais tarde',
+        position: 'top',
+        duration: 5000,
+      });
+
+      return (await toast).present();
     }
+
+
 
     this.eventsList = success.dadosEventos;
 
