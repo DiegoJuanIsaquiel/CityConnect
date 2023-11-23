@@ -1,7 +1,7 @@
 export interface PostProxy {
     usuarioName: string,
     usuarioId: string,
-    usuarioImagem: string,
+    fotoPerfil: string,
     usuario: string,
     imagem: string,
     Descricao: string,
