@@ -135,7 +135,19 @@ export class CreatePostComponent implements OnInit {
       }
     );
 
-    if (error || !success || success.errorMessage !== null) {
+    if (error || !success) {
+      const toast = this.toast.create({
+        message: 'A sua sessão expirou, por favor, entre novamente para continuar acessando o aplicativo.',
+        position: 'top',
+        duration: 5000,
+      });
+
+      localStorage.clear();
+      this.router.navigate(['/login/']);
+      return (await toast).present();
+    }
+      
+    if(success.errorMessage !== null) {
       const toast = this.toast.create({
         message: 'Ocorreu um erro ao tentar criar publicação. Por favor, tente novamente mais tarde',
         position: 'top',

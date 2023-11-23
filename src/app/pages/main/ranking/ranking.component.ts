@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { RankingProxy } from 'src/app/models/proxys/ranking.proxy';
 import { HttpAsyncService } from 'src/app/modules/http-async/services/http-async.service';
@@ -15,7 +16,8 @@ export class RankingComponent {
 
   constructor(
     private readonly http: HttpAsyncService,
-    private readonly toast: ToastController
+    private readonly toast: ToastController,
+    private readonly router: Router
   ) { }
 
   //#endregion
@@ -39,7 +41,19 @@ export class RankingComponent {
 
     if (error || !success) {
       const toast = this.toast.create({
-        message: 'Ocorreu um erro ao tentar obter o ranking de usuário. Por favor, tente novamente mais tarde',
+        message: 'A sua sessão expirou, por favor, entre novamente para continuar acessando o aplicativo.',
+        position: 'top',
+        duration: 5000,
+      });
+
+      localStorage.clear();
+      this.router.navigate(['/login/']);
+      return (await toast).present();
+    }
+
+    if (success.errorMessage !== null) {
+      const toast = this.toast.create({
+        message: 'Ocorreu um erro ao tentar obter o ranking de usuários. Por favor, tente novamente mais tarde',
         position: 'top',
         duration: 5000,
       });
@@ -48,6 +62,14 @@ export class RankingComponent {
     }
 
     this.rankingList = success.dadosRanking;
+  }
+
+  //#endregion
+
+  //#region Public Methods
+
+  public async navigateTo(username: string): Promise<void> {
+    this.router.navigate(['/main/ranking/' + username])
   }
 
   //#endregion

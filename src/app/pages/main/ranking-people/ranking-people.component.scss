@@ -50,7 +50,7 @@
       display: flex;
       justify-content: space-between;
 
-      margin-top: 2.4vh;
+      margin: 2.4vh 0;
 
       .data {
         display: flex;
@@ -129,7 +129,7 @@
       flex-direction: column;
       gap: 2.4vh;
 
-      .information {
+      .conquests-item {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -138,39 +138,13 @@
         .title {
           font-size: 3.8vw;
           font-weight: 600;
+          margin: .8vh 0;
         }
 
         .sub-title {
           font-size: 3.2vw;
           color: var(--grey-70);
           width: 60vw;
-        }
-      }
-
-      .enthusiastic {
-        display: flex;
-
-        ion-icon {
-          font-size: 8.4vw;
-          color: var(--primary-blue);
-        }
-      }
-
-      .explorer {
-        display: flex;
-
-        ion-icon {
-          font-size: 8.4vw;
-          color: var(--primary-orange);
-        }
-      }
-
-      .leader {
-        display: flex;
-
-        ion-icon {
-          font-size: 8.4vw;
-          color: var(--secondary-color);
         }
       }
 
@@ -201,6 +175,11 @@
           font-size: 4.4vw;
           color: var(--secondary-color);
         }
+      }
+
+      .no-conquest p {
+        font-size: 3.4vw;
+        text-align: center;
       }
     }
   }
