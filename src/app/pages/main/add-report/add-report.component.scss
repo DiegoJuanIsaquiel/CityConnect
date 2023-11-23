@@ -157,6 +157,12 @@ ion-modal ion-content{
         padding: 2.2vh;
 
         width: 91vw;
+                        
+        &:disabled {
+            background-color: var(--grey-60);
+            box-shadow: var(--box-shadow-button-disabled);
+            color: var(--text-color);
+        }
     }
 }
 

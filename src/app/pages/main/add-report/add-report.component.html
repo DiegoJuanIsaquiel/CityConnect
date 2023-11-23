@@ -10,7 +10,7 @@
           <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" >
             <label for="category">Categoria <span>*</span></label>
             <ion-item lines="none">
-              <ion-select id="category" formControlName="category" placeholder="Como você classifica esta ocorrência?">
+              <ion-select id="category" placeholder="Como você classifica esta ocorrência?">
                 <ion-select-option>Buraco na via</ion-select-option>
                 <ion-select-option>...</ion-select-option>
                 <ion-select-option>Incêndio</ion-select-option>
@@ -32,11 +32,11 @@
             <ion-item lines="none">
               <ion-select id="time" formControlName="HorarioOcorrencia__c" placeholder="Há quanto tempo isso está acontecendo?">
                 <ion-select-option>Agora</ion-select-option>
-                <ion-select-option>Há 15 minutos</ion-select-option>
-                <ion-select-option>Há 30 minutos</ion-select-option>
-                <ion-select-option>Há 1 hora</ion-select-option>
-                <ion-select-option>Há 12 horas</ion-select-option>
-                <ion-select-option>Há mais de 24 horas</ion-select-option>
+                <ion-select-option>Há 15min</ion-select-option>
+                <ion-select-option>Há 30min</ion-select-option>
+                <ion-select-option>Há 1h</ion-select-option>
+                <ion-select-option>Há 12h</ion-select-option>
+                <ion-select-option>Há mais de 24h</ion-select-option>
                 <ion-select-option>Há mais de 30 dias</ion-select-option>
                 <ion-select-option>Este problema sempre ocorreu</ion-select-option>
               </ion-select>
@@ -63,7 +63,7 @@
                 </section>
               </div>
             </div>
-            <button (click)="onSubmit()">Enviar Ocorrência</button>
+            <button (click)="onSubmit()" [disabled]="!this.formGroup.valid">Enviar Ocorrência</button>
           </form>
         </ion-content>
       </ng-template>

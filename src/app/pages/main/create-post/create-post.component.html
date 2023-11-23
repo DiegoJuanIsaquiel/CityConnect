@@ -58,7 +58,7 @@
       </div>
     </form>
     <div class="button-container">
-      <button (click)="onSubmit()">Publicar</button>
+      <button (click)="onSubmit()" [disabled]="!this.formGroup.valid">Publicar</button>
     </div>
   </ion-content>
 </div>

@@ -27,7 +27,7 @@ export class AddReportComponent {
     private readonly geocodingService: GeocodingService,
   ) {
     this.formGroup = formBuilder.group({
-      Usuario__c: ['', Validators.required],
+      Usuario__c: ['a00Hu0000149jEEIAY', Validators.required],
       Descricao__c: ['', Validators.required],
       RecordTypeId: ['012Hu000000z819IAA', Validators.required],
       Localizacao__Latitude__s: ['', Validators.required],
@@ -259,6 +259,7 @@ export class AddReportComponent {
     }
 
     const result = await this.map.addMarker(marker);
+    this.setMarkerLocation(marker.coordinate.lat, marker.coordinate.lng);
 
     let count: number = 0
 
@@ -308,7 +309,17 @@ export class AddReportComponent {
       this.readFile(file, subscriber);
     });
 
-    observable.subscribe((d: string) => {
+    observable.subscribe(async (d: string) => {
+      if(d.length > 120000){
+        const toast = this.toast.create({
+          message: 'Esta imagem é muito grande. Por favor, tente novamente com uma foto menor.',
+          position: 'top',
+          duration: 5000,
+        });
+
+        return (await toast).present();
+      }
+
       this.formGroup.controls['imagemBase64__c'].setValue(d);
     })
   }

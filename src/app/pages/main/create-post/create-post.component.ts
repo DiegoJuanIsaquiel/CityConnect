@@ -95,7 +95,17 @@ export class CreatePostComponent implements OnInit {
       this.readFile(file, subscriber);
     });
 
-    observable.subscribe((d: string) => {
+    observable.subscribe(async (d: string) => {
+      if(d.length > 120000){
+        const toast = this.toast.create({
+          message: 'Esta imagem é muito grande. Por favor, tente novamente com uma foto menor.',
+          position: 'top',
+          duration: 5000,
+        });
+
+        return (await toast).present();
+      }
+        
       this.formGroup.controls['imagemBase64__c'].setValue(d);
     })
   }
