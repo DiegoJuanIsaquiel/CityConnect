@@ -11,6 +11,107 @@ capacitor-google-maps {
 ion-modal ion-content{
     --background: var(--shadow-color);
 
+    .image-container {
+        position: relative;
+
+        label:not(:first-of-type) {
+            margin: 0 !important;
+        }
+
+        .remove-image-container {
+            background-color: var(--grey-70);
+            width: fit-content;
+            padding: 1.2vw;
+            border-radius: 50%;
+
+            position: absolute;
+            right: 3vw;
+            top: 0.7vh;
+
+            z-index: 10;
+
+            ion-icon {
+                color: var(--grey-60);
+                font-size: 3.2vw;
+            }
+        }
+
+        .image-container img{
+            background-color: var(--background-color);
+            border: 1px solid var(--grey-70);
+            border-radius: 1.2rem;
+
+            object-fit: contain;
+            height: 28vh;
+            width: 90vw;
+
+            margin: 1.8vh 0 0 4.4vw;
+        }
+
+        .upload-label-container {
+            width: fit-content;
+            height: fit-content;
+            border-radius: 1.2rem;
+
+            background: var(--background-color);
+
+            margin: 1.8vh 0 0 4.4vw;
+
+            input {
+                margin: 0;
+            }
+
+            label {
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                padding: .2rem;
+                margin: 0;
+
+                height: 7vh;
+                width: 90vw;
+
+                border-radius: 1.2rem;
+
+                color: var(--grey-60);
+
+                position: relative;
+
+                input {
+                    width: 0;
+                    height: 0;
+                    padding: 0 !important;
+                }
+
+                div {
+
+                    ion-icon {
+                        background-color: var(--primary-color);
+                        border-radius: 50%;
+                        color: var(--grey-60);
+                        font-size: 6.4vw;
+                        padding: 3.4vw;
+                        margin-left: 4.4vw;
+                    }
+
+                    p {
+                        background: var(--linear-gradient);
+                        border-radius: 0.4rem;
+                        padding: .6rem .4rem;
+
+                    }
+                }
+            }
+        }
+
+        .custom-file-input::-webkit-file-upload-button {
+            visibility: hidden;
+        }
+    }
+
     h2 {
         margin: 5.4vh 2.4vw;
         font-weight: 500;
@@ -52,8 +153,7 @@ ion-modal ion-content{
 
         color: var(--shadow-color);
 
-        margin-top: 3.2vh;
-        margin-left: 4.4vw;
+        margin: 3.2vh 0 10vh 4.4vw;
         padding: 2.2vh;
 
         width: 91vw;

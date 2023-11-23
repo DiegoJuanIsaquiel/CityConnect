@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PageEnum } from 'src/app/models/enums/pages.enum';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-main',
@@ -38,6 +39,9 @@ export class MainComponent implements OnInit {
 
     if(this.currentPage == this.pageEnum.ADD_REPORT || this.currentPage == this.pageEnum.ADD_POST)
       this.shouldShowFooter = false;
+
+    if(!localStorage.getItem(environment.keys.token))
+      this.router.navigate(['login']);
   }
 
 

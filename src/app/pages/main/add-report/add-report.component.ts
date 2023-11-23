@@ -1,7 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { GoogleMap, Marker } from '@capacitor/google-maps';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Observable, Subscriber } from 'rxjs';
+import { HttpAsyncModule } from 'src/app/modules/http-async/http-async.module';
+import { HttpAsyncService } from 'src/app/modules/http-async/services/http-async.service';
 import { GeocodingService } from 'src/app/services/geocoding/geocoding.service';
 import { environment } from 'src/environments/environment';
 
@@ -10,30 +14,33 @@ import { environment } from 'src/environments/environment';
   templateUrl: './add-report.component.html',
   styleUrls: ['./add-report.component.scss'],
 })
-export class AddReportComponent implements OnInit {
+export class AddReportComponent {
 
   //#region Constructor
 
   constructor(
     private readonly formBuilder: FormBuilder,
+    private readonly http: HttpAsyncService,
+    private readonly toast: ToastController,
+    private readonly router: Router,
+    private readonly modalController: ModalController,
     private readonly geocodingService: GeocodingService,
   ) {
     this.formGroup = formBuilder.group({
-      category: ['', Validators.required],
-      description: ['', Validators.required],
-      location: ['', Validators.required],
-      datetime: ['', Validators.required],
-      imageUrl: ['', Validators.required]
+      Usuario__c: ['', Validators.required],
+      Descricao__c: ['', Validators.required],
+      RecordTypeId: ['012Hu000000z819IAA', Validators.required],
+      Localizacao__Latitude__s: ['', Validators.required],
+      Localizacao__Longitude__s: ['', Validators.required],
+      HorarioOcorrencia__c: ['', Validators.required],
+      imagemBase64__c: ['', Validators.required],
+      location: ['', Validators.required]
     });
    }
 
   //#endregion
 
   //#region Lifecycle Methods
-
-  public ngOnInit(): void {
-
-  }
 
   public ngAfterViewInit(): void {
     this.createMap();
@@ -57,8 +64,6 @@ export class AddReportComponent implements OnInit {
   public isModalOpen: boolean = true;
 
   public formGroup!: FormGroup;
-
-  public base64ImageUrl: string = '';
 
   public styles: any = [
     {
@@ -285,6 +290,8 @@ export class AddReportComponent implements OnInit {
     if (!success)
       return
 
+    this.formGroup.controls['Localizacao__Latitude__s'].setValue(lat);
+    this.formGroup.controls['Localizacao__Longitude__s'].setValue(lng);
     this.formGroup.controls['location'].setValue('Região próxima a: ' + success.results[0].formatted_address);
   }
 
@@ -294,8 +301,6 @@ export class AddReportComponent implements OnInit {
     const file: File = (target.files as FileList)[0];
 
     this.convertToBase64(file);
-
-    console.log(this.base64ImageUrl);
   }
 
   public convertToBase64(file: File): void {
@@ -304,7 +309,7 @@ export class AddReportComponent implements OnInit {
     });
 
     observable.subscribe((d: string) => {
-      this.base64ImageUrl = d;
+      this.formGroup.controls['imagemBase64__c'].setValue(d);
     })
   }
 
@@ -325,7 +330,46 @@ export class AddReportComponent implements OnInit {
   }
 
   public async onSubmit(): Promise<void> {
-    console.log(this.formGroup.value)
+    this.formGroup.controls['Usuario__c'].setValue('a00Hu0000149jEEIAY');
+
+    if(!this.formGroup.valid)
+      return;
+
+      const { error, success } = await this.http.post<any>(`${environment.api.baseUrl}${environment.api.postagem.create}`, 
+      {
+        publicacao: {
+          Usuario__c: this.formGroup.controls['Usuario__c'].value,
+          Descricao__c: this.formGroup.controls['Descricao__c'].value,
+          RecordTypeId: this.formGroup.controls['RecordTypeId'].value,
+          Localizacao__Latitude__s: this.formGroup.controls['Localizacao__Latitude__s'].value,
+          Localizacao__Longitude__s: this.formGroup.controls['Localizacao__Longitude__s'].value,
+          HorarioOcorrencia__c: this.formGroup.controls['HorarioOcorrencia__c'].value,
+          imagemBase64__c: this.formGroup.controls['imagemBase64__c'].value
+        }
+      }
+    );
+
+    if (error || !success || success.errorMessage !== null) {
+      const toast = this.toast.create({
+        message: 'Ocorreu um erro ao tentar criar ocorrência. Por favor, tente novamente mais tarde',
+        position: 'top',
+        duration: 5000,
+      });
+
+      this.closeModal()
+      this.router.navigate(['/main/home']);
+      return (await toast).present();
+    }
+
+    const toast = this.toast.create({
+      message: 'Postagem publicada com sucesso!',
+      position: 'top',
+      duration: 5000,
+    });
+
+    (await toast).present();
+
+    this.router.navigate(['/main/home']);
   }
 
   public openModal(isOpen: boolean): void {
@@ -334,6 +378,10 @@ export class AddReportComponent implements OnInit {
 
   public closeModal(): void {
     this.isModalOpen = false;
+  }
+
+  public removeImage(): void {
+    this.formGroup.controls['imagemBase64__c'].setValue('');
   }
 
   //#endregion

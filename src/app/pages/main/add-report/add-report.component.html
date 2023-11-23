@@ -22,7 +22,7 @@
             </ion-item>
             <label for="description">Descrição<span>*</span></label>
             <ion-item lines="none">
-              <ion-textarea id="description" formControlName="description" placeholder="Descreva o que está acontecendo..."></ion-textarea>
+              <ion-textarea id="description" formControlName="Descricao__c" placeholder="Descreva o que está acontecendo..."></ion-textarea>
             </ion-item>
             <label for="local">Local<span>*</span></label>
             <ion-item lines="none">
@@ -30,7 +30,7 @@
             </ion-item>
             <label for="time">Horário<span>*</span></label>
             <ion-item lines="none">
-              <ion-select id="time" formControlName="datetime" placeholder="Há quanto tempo isso está acontecendo?">
+              <ion-select id="time" formControlName="HorarioOcorrencia__c" placeholder="Há quanto tempo isso está acontecendo?">
                 <ion-select-option>Agora</ion-select-option>
                 <ion-select-option>Há 15 minutos</ion-select-option>
                 <ion-select-option>Há 30 minutos</ion-select-option>
@@ -42,11 +42,27 @@
               </ion-select>
             </ion-item>
             <label for="image">Inserir Imagem<span>*</span></label>
-            <ion-item lines="none" style="margin: 1.8vh 3.4vw;" [class.withImage]="base64ImageUrl !== ''">
-              <ion-input type="file" accept="image/*" id="image" formControlName="imageUrl" placeholder="Insira uma imagem desta ocorrência" (change)="uploadImage($event)">
-              </ion-input>
-              <img [src]="base64ImageUrl" *ngIf="base64ImageUrl !== ''" >
-            </ion-item>
+            <div class="image-container">
+              <section class="upload-label-container" *ngIf="!formGroup.controls['imagemBase64__c'].value">
+                <label for="imageUrl">
+                  <div>
+                    <p>Adicionar Imagem</p>
+                  </div>
+                  <input type="file" id="imageUrl" nbInput accept="image/png, image/jpeg" class="custom-file-input"
+                    (change)="uploadImage($event)" style="width: 0; height: 0; padding: 0 !important;">
+                </label>
+              </section>
+              <div>
+                <section *ngIf="formGroup.controls['imagemBase64__c'].value">
+                  <div class="remove-image-container" (click)="removeImage()">
+                    <ion-icon name="close"></ion-icon>
+                  </div>
+                  <div class="image-container">
+                    <img class="image" [src]="formGroup.controls['imagemBase64__c'].value" alt="imagem do produto/serviço">
+                  </div>
+                </section>
+              </div>
+            </div>
             <button (click)="onSubmit()">Enviar Ocorrência</button>
           </form>
         </ion-content>
