@@ -20,27 +20,35 @@ import { environment } from 'src/environments/environment';
     }`
   ]
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
 
   //#region Constructor Region
   constructor(
     private router: Router,
   ) {
-    this.setCurrentPage(this.router.url.split('/')[2]);
+
   }
 
   //#endregion
 
   //#region Lifecycle Methods
 
-  public async ngOnInit(): Promise<void> {
-    if(this.currentPage == this.pageEnum.ADD_REPORT || this.currentPage == this.pageEnum.PROFILE || this.currentPage == this.pageEnum.ADD_POST)
+  public async ngDoCheck(): Promise<void> {
+    this.setCurrentPage(this.router.url.split('/')[2]);
+
+    if (this.currentPage == this.pageEnum.ADD_REPORT || this.currentPage == this.pageEnum.PROFILE || this.currentPage == this.pageEnum.ADD_POST)
       this.shouldShowNavbar = false;
 
-    if(this.currentPage == this.pageEnum.ADD_REPORT || this.currentPage == this.pageEnum.ADD_POST)
+    if (this.currentPage == this.pageEnum.HOME || this.currentPage == this.pageEnum.RANKING || this.currentPage == this.pageEnum.EVENTS)
+      this.shouldShowNavbar = true;
+
+    if (this.currentPage == this.pageEnum.ADD_REPORT || this.currentPage == this.pageEnum.ADD_POST)
       this.shouldShowFooter = false;
 
-    if(!localStorage.getItem(environment.keys.token))
+    if (this.currentPage == this.pageEnum.HOME || this.currentPage == this.pageEnum.RANKING || this.currentPage == this.pageEnum.EVENTS || this.currentPage == this.pageEnum.PROFILE)
+      this.shouldShowFooter = true;
+
+    if (!localStorage.getItem(environment.keys.token))
       this.router.navigate(['login']);
   }
 
