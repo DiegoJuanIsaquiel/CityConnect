@@ -4,18 +4,18 @@
     </div>
     <div class="content-container">
         <div class="image-container">
-            <img [src]="currentUser.fotoPerfil || '../../../assets/no-image.svg'" alt="Imagem de perfil do usuário">
+            <img [src]="currentUser.FotoPerfil || '../../../assets/no-image.svg'" alt="Imagem de perfil do usuário">
         </div>
         <div class="username-container">
-            <div class="title">{{currentUser.Nome}}</div>
+            <div class="title">{{currentUser.Nome || 'Usuário não encontrado'}}</div>
             <div class="sub-title">
-                <p>{{currentUser.Usuario}}</p>
+                <p>{{currentUser.Usuario || 'Nome de usuário não encontrado'}}</p>
             </div>
         </div>
         <div class="informations-list">
             <div class="info-item">
                 <label>Data de Nascimento</label>
-                <p>{{currentUser.dataNascimento | date:'dd/MM/YYYY'}}</p>
+                <p>{{currentUser.DataNascimento | date:'dd/MM/YYYY'}}</p>
             </div>
             <div class="info-item">
                 <label>CPF</label>
@@ -23,15 +23,18 @@
             </div>
             <div class="info-item">
                 <label>Celular</label>
-                <p>{{currentUser.telefone | phone}}</p>
+                <p>{{currentUser.Telefone | phone }}</p>
             </div>
             <div class="info-item">
                 <label>Cidade</label>
-                <p>{{userCity}}</p>
+                <p>{{currentUser.Cidade || 'Cidade não encontrada'}}</p>
             </div>
         </div>
         <div class="invite-friends">
             <button>Convidar Amigos</button>
+        </div>
+        <div class="logout" (click)="logout()">
+            <p>Sair da conta</p>
         </div>
     </div>
 </main>

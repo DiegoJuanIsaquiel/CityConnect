@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { Observable, Subscriber } from 'rxjs';
-import { UserProxy } from 'src/app/models/proxys/user.proxy';
 import { HttpAsyncService } from 'src/app/modules/http-async/services/http-async.service';
 import { environment } from 'src/environments/environment';
 
@@ -18,7 +18,8 @@ export class CreatePostComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly formBuilder: FormBuilder,
-    private readonly http: HttpAsyncService
+    private readonly http: HttpAsyncService,
+    private readonly toast: ToastController,
   ) {
     this.formGroup = formBuilder.group({
       Usuario__c: ['', Validators.required],
@@ -27,15 +28,15 @@ export class CreatePostComponent implements OnInit {
       imagemBase64__c: ['', Validators.required]
     })
 
-   }
+  }
 
   //#endregion
 
   //#region Lifecycle Methods
 
   public async ngOnInit(): Promise<void> {
-      await this.getUser();
-   }
+    await this.getUser();
+  }
 
   //#endregion
 
@@ -49,19 +50,32 @@ export class CreatePostComponent implements OnInit {
 
   public currentUserImage: string = '../../../../assets/no-image.svg';
 
+  public isLoading: boolean = true;
+
   //#endregion
 
   //#region Public Methods
 
   public async getUser(): Promise<void> {
-    const { error, success } = await this.http.get<any>(`${environment.api.baseUrl}${environment.api.usuario.get}`);
+    const currentUser = JSON.parse(localStorage.getItem(environment.keys.user)!)[0];
 
-    if(error || !success)
-      return
+    if (!currentUser) {
+      const toast = this.toast.create({
+        message: 'Ocorreu um erro ao tentar obter o criador desta publicação. Por favor, tente novamente mais tarde',
+        position: 'top',
+        duration: 5000,
+      });
 
-    this.currentUser = success.dadosUsuario.Nome;
-    this.currentUserUsername = success.dadosUsuario.Usuario;
-    this.currentUserImage = success.dadosUsuario.fotoPerfil;
+      return (await toast).present();
+    }
+    
+    this.currentUser = currentUser.Nome;
+    this.currentUserUsername = currentUser.Usuario;
+    
+    if(currentUser.FotoPerfil)
+      this.currentUserImage = currentUser.FotoPerfil;
+
+    this.formGroup.controls['Usuario__c'].setValue(currentUser.IdUsuario);
   }
 
   public async navigateTo(url: string): Promise<void> {
@@ -81,12 +95,22 @@ export class CreatePostComponent implements OnInit {
       this.readFile(file, subscriber);
     });
 
-    observable.subscribe((d: string) => {
+    observable.subscribe(async (d: string) => {
+      if(d.length > 120000){
+        const toast = this.toast.create({
+          message: 'Esta imagem é muito grande. Por favor, tente novamente com uma foto menor.',
+          position: 'top',
+          duration: 5000,
+        });
+
+        return (await toast).present();
+      }
+        
       this.formGroup.controls['imagemBase64__c'].setValue(d);
     })
   }
 
-  public readFile(file: File, subscriber: Subscriber<any>){
+  public readFile(file: File, subscriber: Subscriber<any>) {
     const fileReader = new FileReader();
 
     fileReader.readAsDataURL(file);
@@ -104,6 +128,56 @@ export class CreatePostComponent implements OnInit {
 
   public removeImage(): void {
     this.formGroup.controls['imagemBase64__c'].setValue('');
+  }
+
+  public async onSubmit(): Promise<void> {
+    if(!this.formGroup.valid)
+      return
+
+    const { error, success } = await this.http.post<any>(`${environment.api.baseUrl}${environment.api.postagem.create}`, 
+      {
+        publicacao: {
+          Usuario__c: this.formGroup.controls['Usuario__c'].value,
+          Descricao__c: this.formGroup.controls['Descricao__c'].value,
+          RecordTypeId: this.formGroup.controls['RecordTypeId'].value,
+          imagemBase64__c: this.formGroup.controls['imagemBase64__c'].value
+        }
+      }
+    );
+
+    if (error || !success) {
+      const toast = this.toast.create({
+        message: 'A sua sessão expirou, por favor, entre novamente para continuar acessando o aplicativo.',
+        position: 'top',
+        duration: 5000,
+      });
+
+      localStorage.clear();
+      this.router.navigate(['/login/']);
+      return (await toast).present();
+    }
+      
+    if(success.errorMessage !== null) {
+      const toast = this.toast.create({
+        message: 'Ocorreu um erro ao tentar criar publicação. Por favor, tente novamente mais tarde',
+        position: 'top',
+        duration: 5000,
+      });
+
+      this.router.navigate(['/main/home']);
+      return (await toast).present();
+    }
+
+    const toast = this.toast.create({
+      message: 'Postagem publicada com sucesso!',
+      position: 'top',
+      duration: 5000,
+    });
+
+    (await toast).present();
+
+    this.router.navigate(['/main/home']);
+      
   }
 
   //#endregion

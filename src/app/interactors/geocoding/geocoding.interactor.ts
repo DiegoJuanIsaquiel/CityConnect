@@ -29,6 +29,12 @@ export class GeocodingInteractor {
         return await this.http.get<any>(`${url}`);
     }
 
+    public async getCoordinates(street: string, streetNumber: number): Promise<AsyncResult<any>> {
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${street},${streetNumber}&key=${environment.mapsKey}`;
+
+        return await this.http.get<any>(`${url}`);
+    }
+
     //#endregion
 
 }

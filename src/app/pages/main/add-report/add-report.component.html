@@ -2,27 +2,38 @@
   <ion-content>
     <capacitor-google-maps #map></capacitor-google-maps>
 
-    <ion-modal #modal trigger="openModal()" [isOpen]="isModalOpen" (didDismiss)="closeModal()" [initialBreakpoint]="0.25"
-      [breakpoints]="[0.05, 0.25, 0.5, 0.75, 1]">
+    <ion-modal #modal trigger="openModal()" [isOpen]="isModalOpen" (didDismiss)="closeModal()"
+      [initialBreakpoint]="0.25" [breakpoints]="[0.05, 0.25, 0.5, 0.75, 1]">
       <ng-template>
         <ion-content>
           <h2>Registrar Ocorrência</h2>
-          <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" >
+          <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
             <label for="category">Categoria <span>*</span></label>
             <ion-item lines="none">
-              <ion-select id="category" formControlName="category" placeholder="Como você classifica esta ocorrência?">
-                <ion-select-option>Buraco na via</ion-select-option>
-                <ion-select-option>...</ion-select-option>
-                <ion-select-option>Incêndio</ion-select-option>
-                <ion-select-option>...</ion-select-option>
-                <ion-select-option>...</ion-select-option>
-                <ion-select-option>...</ion-select-option>
-                <ion-select-option>Roubo / Furto</ion-select-option>
+              <ion-select id="category" formControlName="Categoria__c"
+                placeholder="Como você classifica esta ocorrência?">
+                <ion-select-option>Buracos nas Estradas</ion-select-option>
+                <ion-select-option>Iluminação Pública Defeituosa</ion-select-option>
+                <ion-select-option>Lixo Acumulado</ion-select-option>
+                <ion-select-option>Incêndio ou Risco de Incêndio</ion-select-option>
+                <ion-select-option>Problemas com o Abastecimento de Água</ion-select-option>
+                <ion-select-option>Infestação de Pragas</ion-select-option>
+                <ion-select-option>Áreas Inundadas</ion-select-option>
+                <ion-select-option>Graffiti ou Pichações Indesejadas</ion-select-option>
+                <ion-select-option>Problemas de Tráfego</ion-select-option>
+                <ion-select-option>Problemas em Parques ou Áreas Verdes</ion-select-option>
+                <ion-select-option>Falhas em Serviços Públicos</ion-select-option>
+                <ion-select-option>Condições Precárias de Calçadas</ion-select-option>
+                <ion-select-option>Problemas Ambientais</ion-select-option>
+                <ion-select-option>Atividades Suspeitas ou Violentas</ion-select-option>
+                <ion-select-option>Problemas em Locais Públicos Fechados </ion-select-option>
+
               </ion-select>
             </ion-item>
             <label for="description">Descrição<span>*</span></label>
             <ion-item lines="none">
-              <ion-textarea id="description" formControlName="description" placeholder="Descreva o que está acontecendo..."></ion-textarea>
+              <ion-textarea id="description" formControlName="Descricao__c"
+                placeholder="Descreva o que está acontecendo..."></ion-textarea>
             </ion-item>
             <label for="local">Local<span>*</span></label>
             <ion-item lines="none">
@@ -30,24 +41,42 @@
             </ion-item>
             <label for="time">Horário<span>*</span></label>
             <ion-item lines="none">
-              <ion-select id="time" formControlName="datetime" placeholder="Há quanto tempo isso está acontecendo?">
+              <ion-select id="time" formControlName="HorarioOcorrencia__c"
+                placeholder="Há quanto tempo isso está acontecendo?">
                 <ion-select-option>Agora</ion-select-option>
-                <ion-select-option>Há 15 minutos</ion-select-option>
-                <ion-select-option>Há 30 minutos</ion-select-option>
-                <ion-select-option>Há 1 hora</ion-select-option>
-                <ion-select-option>Há 12 horas</ion-select-option>
-                <ion-select-option>Há mais de 24 horas</ion-select-option>
+                <ion-select-option>Há 15min</ion-select-option>
+                <ion-select-option>Há 30min</ion-select-option>
+                <ion-select-option>Há 1h</ion-select-option>
+                <ion-select-option>Há 12h</ion-select-option>
+                <ion-select-option>Há mais de 24h</ion-select-option>
                 <ion-select-option>Há mais de 30 dias</ion-select-option>
                 <ion-select-option>Este problema sempre ocorreu</ion-select-option>
               </ion-select>
             </ion-item>
             <label for="image">Inserir Imagem<span>*</span></label>
-            <ion-item lines="none" style="margin: 1.8vh 3.4vw;" [class.withImage]="base64ImageUrl !== ''">
-              <ion-input type="file" accept="image/*" id="image" formControlName="imageUrl" placeholder="Insira uma imagem desta ocorrência" (change)="uploadImage($event)">
-              </ion-input>
-              <img [src]="base64ImageUrl" *ngIf="base64ImageUrl !== ''" >
-            </ion-item>
-            <button (click)="onSubmit()">Enviar Ocorrência</button>
+            <div class="image-container">
+              <section class="upload-label-container" *ngIf="!formGroup.controls['imagemBase64__c'].value">
+                <label for="imageUrl">
+                  <div>
+                    <p>Adicionar Imagem</p>
+                  </div>
+                  <input type="file" id="imageUrl" nbInput accept="image/png, image/jpeg" class="custom-file-input"
+                    (change)="uploadImage($event)" style="width: 0; height: 0; padding: 0 !important;">
+                </label>
+              </section>
+              <div>
+                <section *ngIf="formGroup.controls['imagemBase64__c'].value">
+                  <div class="remove-image-container" (click)="removeImage()">
+                    <ion-icon name="close"></ion-icon>
+                  </div>
+                  <div class="image-container">
+                    <img class="image" [src]="formGroup.controls['imagemBase64__c'].value"
+                      alt="imagem do produto/serviço">
+                  </div>
+                </section>
+              </div>
+            </div>
+            <button (click)="onSubmit()" [disabled]="!this.formGroup.valid">Enviar Ocorrência</button>
           </form>
         </ion-content>
       </ng-template>

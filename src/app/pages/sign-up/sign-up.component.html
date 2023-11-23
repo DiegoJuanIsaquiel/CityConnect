@@ -9,6 +9,9 @@
   <div class="content">
     <div class="stepper">
       <ol class="stepper-component">
+        <li class="step-item" [class.active]="currentStep > stepEnum.CREDENTIALS">
+          <h3 class="step-title">Credenciais</h3>
+        </li>
         <li class="step-item" [class.active]="currentStep > stepEnum.PERSONAL_DATA">
           <h3 class="step-title">Dados Pessoais</h3>
         </li>
@@ -27,11 +30,31 @@
     <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
       <div
         class="personal-data-content"
+        *ngIf="currentStep === stepEnum.CREDENTIALS"
+      >
+        <div class="row">
+          <div class="input-container">
+            <input type="text" id="username" class="username" formControlName="Usuario__c" required (keyup)="checkIfPageIsValid()" />
+            <label for="username">USUÁRIO</label>
+          </div>
+        </div>
+        <div
+          class="row"
+        >
+          <div class="input-container">
+            <input type="text" id="password" class="password" formControlName="Senha__c" required (keyup)="checkIfPageIsValid()" />
+            <label for="password">SENHA</label>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="personal-data-content"
         *ngIf="currentStep === stepEnum.PERSONAL_DATA"
       >
         <div class="row">
           <div class="input-container">
-            <input type="text" id="name" class="name" formControlName="name" required (keyup)="checkIfPageIsValid()" />
+            <input type="text" id="name" class="name" formControlName="Name" required (keyup)="checkIfPageIsValid()" />
             <label for="name">NOME</label>
           </div>
         </div>
@@ -45,11 +68,11 @@
           "
         >
           <div class="input-container">
-            <input type="text" id="cpf" class="cpf" formControlName="cpf" [mask]="'000.000.000-00'" required (keyup)="checkIfPageIsValid()" />
+            <input type="text" id="cpf" class="cpf" formControlName="CPF__c" [mask]="'000.000.000-00'" required (keyup)="checkIfPageIsValid()" />
             <label for="cpf">CPF</label>
           </div>
           <div class="input-container">
-            <input type="text" id="birthday" class="birthday" formControlName="birthday" [mask]="'XX/XX/XXXX'" (change)="convertToDate($event.target)" required (keyup)="checkIfPageIsValid()" />
+            <input type="text" id="birthday" class="birthday" formControlName="DataNascimento__c" [mask]="'XX/XX/XXXX'" (change)="convertToDate($event.target)" required (keyup)="checkIfPageIsValid()" />
             <label for="birthday">NASCIMENTO</label>
           </div>
         </div>
@@ -58,13 +81,13 @@
       <div class="contact-content" *ngIf="currentStep === stepEnum.CONTACT">
         <div class="row">
           <div class="input-container">
-            <input type="email" id="email" class="email" formControlName="email" required (keyup)="checkIfPageIsValid()" />
+            <input type="email" id="email" class="email" formControlName="Email__c" required (keyup)="checkIfPageIsValid()" />
             <label for="email">E-MAIL</label>
           </div>
         </div>
         <div class="row">
           <div class="input-container">
-            <input type="text" id="phone" class="phone" formControlName="phone" [mask]="'(XX) 00000-0000'" required (keyup)="checkIfPageIsValid()" />
+            <input type="text" id="phone" class="phone" formControlName="Telefone__c" [mask]="'(XX) 00000-0000'" required (keyup)="checkIfPageIsValid()" />
             <label for="phone">CELULAR</label>
           </div>
         </div>
@@ -73,7 +96,7 @@
       <div class="address-content" *ngIf="currentStep === stepEnum.ADDRESS">
         <div class="row">
           <div class="input-container">
-            <input type="text" id="cep" class="cep" formControlName="cep" required [mask]="'00000-000'" (change)="setAddress($event.target)" (keyup)="checkIfPageIsValid()" />
+            <input type="text" id="cep" class="cep" formControlName="CEP__c" required [mask]="'00000-000'" (change)="setAddress($event.target)" (keyup)="checkIfPageIsValid()" />
             <label for="cep">CEP</label>
           </div>
         </div>
@@ -86,17 +109,17 @@
             "
         >
           <div class="input-container">
-            <input type="text" id="street" class="street" formControlName="street" [disabled]="true"  required (keyup)="checkIfPageIsValid()" />
+            <input type="text" id="street" class="street" formControlName="Rua__c" [disabled]="true"  required (keyup)="checkIfPageIsValid()" />
             <label for="street">Rua</label>
           </div>
           <div class="input-container">
-            <input type="text" id="streetNumber" class="streetNumber" formControlName="streetNumber" required [mask]="'00000'" (keyup)="checkIfPageIsValid()" />
+            <input type="text" id="streetNumber" class="streetNumber" formControlName="Numero__c" required [mask]="'00000'" (keyup)="checkIfPageIsValid()" />
             <label for="streetNumber">N°</label>
           </div>
         </div>
         <div class="row">
           <div class="input-container">
-            <input type="text" id="city" class="city" formControlName="city" [disabled]="true"  required (keyup)="checkIfPageIsValid()" />
+            <input type="text" id="city" class="city" formControlName="Cidade__c" [disabled]="true"  required (keyup)="checkIfPageIsValid()" />
             <label for="city">Cidade</label>
           </div>
         </div>
@@ -110,7 +133,7 @@
           <div class="ion-item">
             <label>Nome:</label>
             <div class="item-container">
-              <p>{{formGroup.value.name}}</p>
+              <p>{{formGroup.value.Name}}</p>
               <ion-button fill="clear" (click)="currentStep = stepEnum.PERSONAL_DATA">
                 <ion-icon name="create"></ion-icon>
               </ion-button>
@@ -119,7 +142,7 @@
           <div class="ion-item">
             <label>CPF:</label>
             <div class="item-container">
-              <p>{{formGroup.value.cpf | cpf}}</p>
+              <p>{{formGroup.value.CPF__c | cpf}}</p>
               <ion-button fill="clear" (click)="currentStep = stepEnum.PERSONAL_DATA">
                 <ion-icon name="create"></ion-icon>
               </ion-button>
@@ -128,7 +151,7 @@
           <div class="ion-item">
             <label>Nascimento:</label>
             <div class="item-container">
-              <p>{{formGroup.value.birthday | date:'dd/MM/YYYY'}}</p>
+              <p>{{formGroup.value.DataNascimento__c | date:'dd/MM/YYYY'}}</p>
               <ion-button fill="clear" (click)="currentStep = stepEnum.PERSONAL_DATA">
                 <ion-icon name="create"></ion-icon>
               </ion-button>
@@ -137,7 +160,7 @@
           <div class="ion-item">
             <label>E-mail:</label>
             <div class="item-container">
-              <p>{{formGroup.value.email}}</p>
+              <p>{{formGroup.value.Email__c}}</p>
               <ion-button fill="clear" (click)="currentStep = stepEnum.CONTACT">
                 <ion-icon name="create"></ion-icon>
               </ion-button>
@@ -146,7 +169,7 @@
           <div class="ion-item">
             <label>Celular:</label>
             <div class="item-container">
-              <p>{{formGroup.value.phone | phone}}</p>
+              <p>{{formGroup.value.Telefone__c | phone}}</p>
               <ion-button fill="clear" (click)="currentStep = stepEnum.CONTACT">
                 <ion-icon name="create"></ion-icon>
               </ion-button>
@@ -155,7 +178,7 @@
           <div class="ion-item">
             <label>Endereço:</label>
             <div class="item-container">
-              <p>{{formGroup.value.street + ', ' + formGroup.value.streetNumber + ' - ' + formGroup.value.city}}</p>
+              <p>{{formGroup.value.Rua__c + ', ' + formGroup.value.Numero__c + ' - ' + formGroup.value.Cidade__c}}</p>
               <ion-button fill="clear" (click)="currentStep = stepEnum.ADDRESS">
                 <ion-icon name="create"></ion-icon>
               </ion-button>
@@ -167,7 +190,7 @@
   </div>
 
   <div class="button-container">
-    <button (click)="setCurrentStep(); checkIfPageIsValid()" [disabled]="!isPageValid" >
+    <button (click)="currentStep == stepEnum.CONFIRM_DATA ? onSubmit() : setCurrentStep(); checkIfPageIsValid()" [disabled]="!isPageValid" >
       {{ currentStep !== stepEnum.CONFIRM_DATA ? "Próximo" : "Confirmar" }}
     </button>
   </div>

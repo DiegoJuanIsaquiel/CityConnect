@@ -7,29 +7,38 @@ import { getErrorMessage } from "src/app/utils/functions";
 //#endregion
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class GeocodingService {
 
-    //#region constructor
+  //#region constructor
 
-    constructor(
-        private readonly geocodingInteractor: GeocodingInteractor,
-    ) { }
+  constructor(
+    private readonly geocodingInteractor: GeocodingInteractor,
+  ) { }
 
-    //#endregion
+  //#endregion
 
-    //#region public methods
+  //#region public methods
 
 
-    public async getAddress(lat: number, lng: number): Promise<[any | null, string]> {
-        const { success, error } = await this.geocodingInteractor.getAddress(lat, lng);
+  public async getAddress(lat: number, lng: number): Promise<[any | null, string]> {
+    const { success, error } = await this.geocodingInteractor.getAddress(lat, lng);
 
-        if (!success)
-          return [null, getErrorMessage(error)];
+    if (!success)
+      return [null, getErrorMessage(error)];
 
-        return [success, ''];
-      }
+    return [success, ''];
+  }
 
-    //#endregion
+  public async getCoordinates(street: string, streetNumber: number): Promise<[any | null, string]> {
+    const { success, error } = await this.geocodingInteractor.getCoordinates(street, streetNumber);
+
+    if (!success)
+      return [null, getErrorMessage(error)];
+
+    return [success, ''];
+  }
+
+  //#endregion
 }

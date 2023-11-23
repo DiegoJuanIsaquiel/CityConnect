@@ -8,57 +8,57 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <div class="post-container">
-      <div class="user-container">
-        <div class="image-container">
-          <img [src]="currentUserImage" alt="Foto de perfil do autor da publicação">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <div class="post-container">
+        <div class="user-container">
+          <div class="image-container">
+            <img [src]="currentUserImage" alt="Foto de perfil do autor da publicação">
+          </div>
+          <div class="username-container">
+            <div class="username">
+              <h3>{{currentUser}}</h3>
+              <p>{{currentUserUsername}}</p>
+            </div>
+          </div>
         </div>
-        <div class="username-container">
-          <div class="username">
-            <h3>{{currentUser}}</h3>
-            <p>{{currentUserUsername}}</p>
+        <div class="text-container">
+          <ion-textarea placeholder="O que você está pensando?" formControlName="Descricao__c"
+            [autoGrow]="true"></ion-textarea>
+        </div>
+        <div class="image-container">
+          <section class="upload-label-container" *ngIf="!formGroup.controls['imagemBase64__c'].value">
+            <label for="imageUrl">
+              <div>
+                <ion-icon name="images"></ion-icon>
+                <br>
+                <p>Adicionar Imagem</p>
+              </div>
+              <input type="file" id="imageUrl" nbInput accept="image/png, image/jpeg" class="custom-file-input"
+                (change)="uploadImage($event)">
+            </label>
+          </section>
+          <div>
+            <section *ngIf="formGroup.controls['imagemBase64__c'].value">
+              <div class="remove-image-container" (click)="removeImage()">
+                <ion-icon name="close"></ion-icon>
+              </div>
+              <div class="image-container">
+                <img class="image" [src]="formGroup.controls['imagemBase64__c'].value" alt="imagem do produto/serviço">
+              </div>
+            </section>
+          </div>
+        </div>
+        <div class="options-container">
+          <span>Adicionar a publicação</span>
+          <div class="icon-container">
+            <ion-icon name="image"></ion-icon>
+            <ion-icon name="compass"></ion-icon>
           </div>
         </div>
       </div>
-      <div class="text-container">
-        <ion-textarea
-          placeholder="O que você está pensando?"
-          [autoGrow]="true"
-        ></ion-textarea>
-      </div>
-      <div class="image-container">
-        <section class="upload-label-container"*ngIf="!formGroup.controls['imagemBase64__c'].value">
-          <label for="imageUrl">
-            <div>
-              <ion-icon name="images"></ion-icon>
-              <br>
-              <p>Adicionar Imagem</p>
-            </div>
-            <input type="file" id="imageUrl" nbInput accept="image/png, image/jpeg"
-              class="custom-file-input" (change)="uploadImage($event)">
-          </label>
-        </section>
-        <div>
-          <section *ngIf="formGroup.controls['imagemBase64__c'].value">
-            <div class="remove-image-container" (click)="removeImage()">
-              <ion-icon name="close"></ion-icon>
-            </div>
-            <div class="image-container">
-              <img class="image" [src]="formGroup.controls['imagemBase64__c'].value" alt="imagem do produto/serviço">
-            </div>
-          </section>
-        </div>
-      </div>
-      <div class="options-container">
-        <span>Adicionar a publicação</span>
-        <div class="icon-container">
-          <ion-icon name="image"></ion-icon>
-          <ion-icon name="compass"></ion-icon>
-        </div>
-      </div>
-    </div>
+    </form>
     <div class="button-container">
-      <button>Publicar</button>
+      <button (click)="onSubmit()" [disabled]="!this.formGroup.valid">Publicar</button>
     </div>
   </ion-content>
 </div>

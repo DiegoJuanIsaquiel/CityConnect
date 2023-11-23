@@ -8,7 +8,7 @@
     </div>
 
     <div class="container-body">
-      <div class="body-ranking" *ngFor="let ranking of rankingList; let i = index" [attr.data-index]="i">
+      <div class="body-ranking" *ngFor="let ranking of rankingList; let i = index" [attr.data-index]="i" (click)="navigateTo(ranking.Usuario)">
         <a class="body-item">
           <div class="body-image">
             <div class="body-index">
@@ -24,6 +24,10 @@
             <p>{{ranking.Pontuacao > 999 ? '+999' : ranking.Pontuacao}} Pontos</p>
           </div>
         </a>
+      </div>
+
+      <div class="spinner" *ngIf="isLoading">
+        <ion-spinner name="crescent"></ion-spinner>
       </div>
     </div>
   </div>
