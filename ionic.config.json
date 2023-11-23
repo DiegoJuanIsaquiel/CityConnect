@@ -1,7 +1,12 @@
 {
   "name": "CityConnect",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+      "enabled": false
+    },
+    "cordova": {
+      "enabled": false
+    }
   },
   "type": "angular"
 }
