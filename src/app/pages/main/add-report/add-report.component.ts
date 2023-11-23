@@ -23,11 +23,14 @@ export class AddReportComponent {
     private readonly http: HttpAsyncService,
     private readonly toast: ToastController,
     private readonly router: Router,
-    private readonly modalController: ModalController,
     private readonly geocodingService: GeocodingService,
   ) {
+
+    let userId = JSON.parse(localStorage.getItem(environment.keys.user)!)[0].IdUsuario;
+
     this.formGroup = formBuilder.group({
-      Usuario__c: ['a00Hu0000149jEEIAY', Validators.required],
+      Categoria__c: ['', Validators.required],
+      Usuario__c: [userId, Validators.required],
       Descricao__c: ['', Validators.required],
       RecordTypeId: ['012Hu000000z819IAA', Validators.required],
       Localizacao__Latitude__s: ['', Validators.required],
@@ -322,6 +325,7 @@ export class AddReportComponent {
 
       this.formGroup.controls['imagemBase64__c'].setValue(d);
     })
+
   }
 
   public readFile(file: File, subscriber: Subscriber<any>){
@@ -341,7 +345,6 @@ export class AddReportComponent {
   }
 
   public async onSubmit(): Promise<void> {
-    this.formGroup.controls['Usuario__c'].setValue('a00Hu0000149jEEIAY');
 
     if(!this.formGroup.valid)
       return;

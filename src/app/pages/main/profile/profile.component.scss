@@ -87,7 +87,7 @@ main{
             align-items: center;
             justify-content: center;
 
-            margin: 4.4vh 0;
+            margin: 4.4vh 0 2.2vh 0;
 
             button {
                 display: flex;
@@ -104,6 +104,14 @@ main{
                 padding: 3.2vw;
                 width: 90vw;
             }
+        }
+
+        .logout p {
+            color: var(--primary-red);
+            font-size: 3.4vw;
+            font-weight: 700;
+            text-align: center;
+            margin: 0;
         }
     }
 }

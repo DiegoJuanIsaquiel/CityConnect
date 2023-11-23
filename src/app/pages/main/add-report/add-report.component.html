@@ -2,27 +2,38 @@
   <ion-content>
     <capacitor-google-maps #map></capacitor-google-maps>
 
-    <ion-modal #modal trigger="openModal()" [isOpen]="isModalOpen" (didDismiss)="closeModal()" [initialBreakpoint]="0.25"
-      [breakpoints]="[0.05, 0.25, 0.5, 0.75, 1]">
+    <ion-modal #modal trigger="openModal()" [isOpen]="isModalOpen" (didDismiss)="closeModal()"
+      [initialBreakpoint]="0.25" [breakpoints]="[0.05, 0.25, 0.5, 0.75, 1]">
       <ng-template>
         <ion-content>
           <h2>Registrar Ocorrência</h2>
-          <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" >
+          <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
             <label for="category">Categoria <span>*</span></label>
             <ion-item lines="none">
-              <ion-select id="category" placeholder="Como você classifica esta ocorrência?">
-                <ion-select-option>Buraco na via</ion-select-option>
-                <ion-select-option>...</ion-select-option>
-                <ion-select-option>Incêndio</ion-select-option>
-                <ion-select-option>...</ion-select-option>
-                <ion-select-option>...</ion-select-option>
-                <ion-select-option>...</ion-select-option>
-                <ion-select-option>Roubo / Furto</ion-select-option>
+              <ion-select id="category" formControlName="Categoria__c"
+                placeholder="Como você classifica esta ocorrência?">
+                <ion-select-option>Buracos nas Estradas</ion-select-option>
+                <ion-select-option>Iluminação Pública Defeituosa</ion-select-option>
+                <ion-select-option>Lixo Acumulado</ion-select-option>
+                <ion-select-option>Incêndio ou Risco de Incêndio</ion-select-option>
+                <ion-select-option>Problemas com o Abastecimento de Água</ion-select-option>
+                <ion-select-option>Infestação de Pragas</ion-select-option>
+                <ion-select-option>Áreas Inundadas</ion-select-option>
+                <ion-select-option>Graffiti ou Pichações Indesejadas</ion-select-option>
+                <ion-select-option>Problemas de Tráfego</ion-select-option>
+                <ion-select-option>Problemas em Parques ou Áreas Verdes</ion-select-option>
+                <ion-select-option>Falhas em Serviços Públicos</ion-select-option>
+                <ion-select-option>Condições Precárias de Calçadas</ion-select-option>
+                <ion-select-option>Problemas Ambientais</ion-select-option>
+                <ion-select-option>Atividades Suspeitas ou Violentas</ion-select-option>
+                <ion-select-option>Problemas em Locais Públicos Fechados </ion-select-option>
+
               </ion-select>
             </ion-item>
             <label for="description">Descrição<span>*</span></label>
             <ion-item lines="none">
-              <ion-textarea id="description" formControlName="Descricao__c" placeholder="Descreva o que está acontecendo..."></ion-textarea>
+              <ion-textarea id="description" formControlName="Descricao__c"
+                placeholder="Descreva o que está acontecendo..."></ion-textarea>
             </ion-item>
             <label for="local">Local<span>*</span></label>
             <ion-item lines="none">
@@ -30,7 +41,8 @@
             </ion-item>
             <label for="time">Horário<span>*</span></label>
             <ion-item lines="none">
-              <ion-select id="time" formControlName="HorarioOcorrencia__c" placeholder="Há quanto tempo isso está acontecendo?">
+              <ion-select id="time" formControlName="HorarioOcorrencia__c"
+                placeholder="Há quanto tempo isso está acontecendo?">
                 <ion-select-option>Agora</ion-select-option>
                 <ion-select-option>Há 15min</ion-select-option>
                 <ion-select-option>Há 30min</ion-select-option>
@@ -58,7 +70,8 @@
                     <ion-icon name="close"></ion-icon>
                   </div>
                   <div class="image-container">
-                    <img class="image" [src]="formGroup.controls['imagemBase64__c'].value" alt="imagem do produto/serviço">
+                    <img class="image" [src]="formGroup.controls['imagemBase64__c'].value"
+                      alt="imagem do produto/serviço">
                   </div>
                 </section>
               </div>

@@ -72,10 +72,10 @@ export class CreatePostComponent implements OnInit {
     this.currentUser = currentUser.Nome;
     this.currentUserUsername = currentUser.Usuario;
     
-    if(currentUser.fotoPerfil)
-      this.currentUserImage = currentUser.fotoPerfil;
+    if(currentUser.FotoPerfil)
+      this.currentUserImage = currentUser.FotoPerfil;
 
-    this.formGroup.controls['Usuario__c'].setValue('a00Hu0000149jEEIAY');
+    this.formGroup.controls['Usuario__c'].setValue(currentUser.IdUsuario);
   }
 
   public async navigateTo(url: string): Promise<void> {

@@ -8,6 +8,6 @@ import { environment } from 'src/environments/environment';
 })
 export class NavbarComponent {
 
-  public userImage: string = JSON.parse(localStorage.getItem(environment.keys.user)!)[0].fotoPerfil;
+  public userImage: string = JSON.parse(localStorage.getItem(environment.keys.user)!)[0].FotoPerfil;
 
 }
