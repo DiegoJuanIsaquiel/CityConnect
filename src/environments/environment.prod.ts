@@ -23,5 +23,8 @@ export const environment = {
     ranking: {
       get: "/ranking/",
     },
+    rankingPeople: {
+      get: "/ranking-usuario/",
+    },
   }
 };
